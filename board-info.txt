@@ -1,0 +1,3 @@
+require board=aries
+require version-bootloader=I997
+require version-baseband=I997
