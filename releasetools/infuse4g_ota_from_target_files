@@ -98,7 +98,7 @@ def WriteFullOTAPackage(input_zip, output_zip):
   script.RunVerifyCachePartitionSize()
 
   script.ShowProgress(0.2, 10)
-  script.BMLWriteRawImage("/dev/block/bml7", "boot.img")
+  script.BMLWriteRawImage("boot", "boot.img")
 
   script.ShowProgress(0.1, 0)
   device_specific.FullOTA_InstallEnd()
