@@ -131,31 +131,37 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_LOCALES := hdpi
 
 # kernel modules
+# root
 PRODUCT_COPY_FILES += \
-    device/samsung/infuse4g/pvrsrvkm.ko:root/lib/modules/pvrsrvkm.ko \
-    device/samsung/infuse4g/s3c_lcd.ko:root/lib/modules/s3c_lcd.ko \
-    device/samsung/infuse4g/s3c_bc.ko:root/lib/modules/s3c_bc.ko \
-    device/samsung/infuse4g/vibrator.ko:root/lib/modules/vibrator.ko \
-    device/samsung/infuse4g/Si4709_driver.ko:root/lib/modules/Si4709_driver.ko \
-    device/samsung/infuse4g/fsr.ko:root/lib/modules/fsr.ko \
-    device/samsung/infuse4g/fsr_stl.ko:root/lib/modules/fsr_stl.ko \
-    device/samsung/infuse4g/rfs_glue.ko:root/lib/modules/rfs_glue.ko \
-    device/samsung/infuse4g/rfs_fat.ko:root/lib/modules/rfs_fat.ko \
-    device/samsung/infuse4g/onedram.ko:root/lib/modules/onedram.ko \
-    device/samsung/infuse4g/svnet.ko:root/lib/modules/svnet.ko \
-    device/samsung/infuse4g/modemctl.ko:root/lib/modules/modemctl.ko \
-    device/samsung/infuse4g/storage.ko:root/lib/modules/storage.ko \
-    device/samsung/infuse4g/bthid.ko:root/lib/modules/bthid.ko
+    device/samsung/infuse4g/modules/pvrsrvkm.ko:root/lib/modules/pvrsrvkm.ko \
+    device/samsung/infuse4g/modules/s3c_lcd.ko:root/lib/modules/s3c_lcd.ko \
+    device/samsung/infuse4g/modules/s3c_bc.ko:root/lib/modules/s3c_bc.ko \
+    device/samsung/infuse4g/modules/vibrator.ko:root/lib/modules/vibrator.ko \
+    device/samsung/infuse4g/modules/Si4709_driver.ko:root/lib/modules/Si4709_driver.ko \
+    device/samsung/infuse4g/modules/fsr.ko:root/lib/modules/fsr.ko \
+    device/samsung/infuse4g/modules/fsr_stl.ko:root/lib/modules/fsr_stl.ko \
+    device/samsung/infuse4g/modules/rfs_glue.ko:root/lib/modules/rfs_glue.ko \
+    device/samsung/infuse4g/modules/rfs_fat.ko:root/lib/modules/rfs_fat.ko \
+    device/samsung/infuse4g/modules/onedram.ko:root/lib/modules/onedram.ko \
+    device/samsung/infuse4g/modules/svnet.ko:root/lib/modules/svnet.ko \
+    device/samsung/infuse4g/modules/modemctl.ko:root/lib/modules/modemctl.ko \
+    device/samsung/infuse4g/modules/storage.ko:root/lib/modules/storage.ko \
+    device/samsung/infuse4g/modules/bthid.ko:root/lib/modules/bthid.ko
 
+#recovery
 PRODUCT_COPY_FILES += \
-    device/samsung/infuse4g/pvrsrvkm.ko:recovery/root/lib/modules/pvrsrvkm.ko \
-    device/samsung/infuse4g/s3c_lcd.ko:recovery/root/lib/modules/s3c_lcd.ko \
-    device/samsung/infuse4g/s3c_bc.ko:recovery/root/lib/modules/s3c_bc.ko \
-    device/samsung/infuse4g/vibrator.ko:recovery/root/lib/modules/vibrator.ko \
-    device/samsung/infuse4g/fsr.ko:recovery/root/lib/modules/fsr.ko \
-    device/samsung/infuse4g/fsr_stl.ko:recovery/root/lib/modules/fsr_stl.ko \
-    device/samsung/infuse4g/rfs_glue.ko:recovery/root/lib/modules/rfs_glue.ko \
-    device/samsung/infuse4g/rfs_fat.ko:recovery/root/lib/modules/rfs_fat.ko
+    device/samsung/infuse4g/modules/pvrsrvkm.ko:recovery/root/lib/modules/pvrsrvkm.ko \
+    device/samsung/infuse4g/modules/s3c_lcd.ko:recovery/root/lib/modules/s3c_lcd.ko \
+    device/samsung/infuse4g/modules/s3c_bc.ko:recovery/root/lib/modules/s3c_bc.ko \
+    device/samsung/infuse4g/modules/vibrator.ko:recovery/root/lib/modules/vibrator.ko \
+    device/samsung/infuse4g/modules/fsr.ko:recovery/root/lib/modules/fsr.ko \
+    device/samsung/infuse4g/modules/fsr_stl.ko:recovery/root/lib/modules/fsr_stl.ko \
+    device/samsung/infuse4g/modules/rfs_glue.ko:recovery/root/lib/modules/rfs_glue.ko \
+    device/samsung/infuse4g/modules/rfs_fat.ko:recovery/root/lib/modules/rfs_fat.ko
+
+#system
+PRODUCT_COPY_FILES += \
+    device/samsung/infuse4g/modules/dhd.ko:system/lib/modules/dhd.ko \
 
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
