@@ -131,10 +131,32 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_LOCALES := hdpi
 
 # kernel modules
-#PRODUCT_COPY_FILES += \
-#    device/samsung/infuse4g/bcm4329.ko:system/lib/modules/bcm4329.ko \
-#    device/samsung/infuse4g/cifs.ko:system/lib/modules/cifs.ko \
-#    device/samsung/infuse4g/tun.ko:system/lib/modules/tun.ko
+PRODUCT_COPY_FILES += \
+    device/samsung/infuse4g/pvrsrvkm.ko:root/lib/modules/pvrsrvkm.ko \
+    device/samsung/infuse4g/s3c_lcd.ko:root/lib/modules/s3c_lcd.ko \
+    device/samsung/infuse4g/s3c_bc.ko:root/lib/modules/s3c_bc.ko \
+    device/samsung/infuse4g/vibrator.ko:root/lib/modules/vibrator.ko \
+    device/samsung/infuse4g/Si4709_driver.ko:root/lib/modules/Si4709_driver.ko \
+    device/samsung/infuse4g/fsr.ko:root/lib/modules/fsr.ko \
+    device/samsung/infuse4g/fsr_stl.ko:root/lib/modules/fsr_stl.ko \
+    device/samsung/infuse4g/rfs_glue.ko:root/lib/modules/rfs_glue.ko \
+    device/samsung/infuse4g/rfs_fat.ko:root/lib/modules/rfs_fat.ko \
+    device/samsung/infuse4g/onedram.ko:root/lib/modules/onedram.ko \
+    device/samsung/infuse4g/svnet.ko:root/lib/modules/svnet.ko \
+    device/samsung/infuse4g/modemctl.ko:root/lib/modules/modemctl.ko \
+    device/samsung/infuse4g/storage.ko:root/lib/modules/storage.ko \
+    device/samsung/infuse4g/bthid.ko:root/lib/modules/bthid.ko
+
+PRODUCT_COPY_FILES += \
+    device/samsung/infuse4g/pvrsrvkm.ko:recovery/root/lib/modules/pvrsrvkm.ko \
+    device/samsung/infuse4g/s3c_lcd.ko:recovery/root/lib/modules/s3c_lcd.ko \
+    device/samsung/infuse4g/s3c_bc.ko:recovery/root/lib/modules/s3c_bc.ko \
+    device/samsung/infuse4g/vibrator.ko:recovery/root/lib/modules/vibrator.ko \
+    device/samsung/infuse4g/fsr.ko:recovery/root/lib/modules/fsr.ko \
+    device/samsung/infuse4g/fsr_stl.ko:recovery/root/lib/modules/fsr_stl.ko \
+    device/samsung/infuse4g/rfs_glue.ko:recovery/root/lib/modules/rfs_glue.ko \
+    device/samsung/infuse4g/rfs_fat.ko:recovery/root/lib/modules/rfs_fat.ko
+
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
     LOCAL_KERNEL := device/samsung/infuse4g/kernel
