@@ -5,35 +5,31 @@ sysclktz 0
 loglevel 3
 
 # setup the global environment
-    export PATH /sbin:/system/sbin:/system/bin:/system/xbin
-    export LD_LIBRARY_PATH /system/lib
+    export PATH /sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin
+    export LD_LIBRARY_PATH /vendor/lib:/system/lib
     export ANDROID_BOOTLOGO 1
+    export ANDROID_CACHE /cache
     export ANDROID_ROOT /system
     export ANDROID_ASSETS /system/app
     export ANDROID_DATA /data
-
-    export INTERNAL_STORAGE /mnt/sdcard
-    export EXTERNAL_STORAGE /mnt/sdcard/external_sd
+    export EXTERNAL_STORAGE /mnt/sdcard
+    export PHONE_STORAGE /mnt/emmc
     export ASEC_MOUNTPOINT /mnt/asec
-
-    export BOOTCLASSPATH /system/framework/core.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/android.policy.jar:/system/framework/services.jar
-
-    export TMPDIR /data/local/tmp
+    export LOOP_MOUNTPOINT /mnt/obb
+    export SD_EXT_DIRECTORY /sd-ext
+    export BOOTCLASSPATH /system/framework/core.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/core-junit.jar
 
     # ko files for 3D
-    insmod /modules/pvrsrvkm.ko
-    insmod /modules/s3c_lcd.ko
-    insmod /modules/s3c_bc.ko
+    insmod /lib/modules/pvrsrvkm.ko
+    insmod /lib/modules/s3c_lcd.ko
+    insmod /lib/modules/s3c_bc.ko
 
     # ko files for vibrator
     insmod /lib/modules/vibrator.ko
 
-	# ko files for Fm radio
-	insmod /lib/modules/Si4709_driver.ko
+    # ko files for Fm radio
+    insmod /lib/modules/Si4709_driver.ko
 	
-#add booting sound property 
-	setprop audioflinger.bootsnd 1
-
 # Backward compatibility
     symlink /system/etc /etc
     symlink /sys/kernel/debug /d
@@ -41,6 +37,7 @@ loglevel 3
 # create mountpoints
     mkdir /mnt 0775 root system
     mkdir /mnt/sdcard 0000 system system
+    mkdir /mnt/emmc 0000 system system
 
 # Create cgroup mount point for cpu accounting
     mkdir /acct
@@ -60,12 +57,12 @@ loglevel 3
 
 # Backwards Compat - XXX: Going away in G*
     symlink /mnt/sdcard /sdcard
+    symlink /mnt/emmc /emmc
 
     mkdir /system
     mkdir /data 0771 system system
+    mkdir /dbdata 0771 system system
     mkdir /efs 0771 system system
-    chown system system /efs
-    chmod 0771 /efs
     mkdir /cache 0770 system cache
     mkdir /config 0500 root root
 
@@ -112,23 +109,17 @@ loglevel 3
 
     # mount mtd partitions
     # Mount /system rw first to give the filesystem a chance to save a checkpoint
-    #mount yaffs2 mtd@system /system
-    mount rfs /dev/block/stl9 /system ro check=no
+    mount ext4 /dev/block/stl9 /system rw
     mount ext4 /dev/block/stl9 /system remount ro
-    #mount yaffs2 mtd@system /system ro remount
 
     # We chown/chmod /data again so because mount is run as root + defaults
     # mount yaffs2 mtd@userdata /data nosuid nodev
     # use movinand second partition as /data. d.moskvitin
-    #exec apply_system_policy /dev/block/stl10
-    exec apply_disk_policy
-    mkdir /data
-    mount rfs /dev/block/mmcblk0p2 /data nosuid nodev check=no
+    mount ext4 /dev/block/mmcblk0p2 /data nosuid nodev
     chown system system /data
     chmod 0771 /data
 
-    mkdir /dbdata
-    mount rfs /dev/block/stl10 /dbdata nosuid nodev check=no
+    mount ext4 /dev/block/stl10 /dbdata nosuid nodev
     chown system system /dbdata
     chmod 0771 /dbdata
     chmod 0771 /dbdata
@@ -162,8 +153,7 @@ loglevel 3
     write /proc/apanic_console 1
 
     # Same reason as /data above
-    #mount yaffs2 mtd@cache /cache nosuid nodev
-    mount rfs /dev/block/stl11 /cache nosuid nodev check=no
+    mount ext4 /dev/block/stl11 /cache nosuid nodev
     chown system cache /cache
     chmod 0770 /cache
 
@@ -200,7 +190,7 @@ loglevel 3
     # give system access to wpa_supplicant.conf for backup and restore
     mkdir /data/misc/wifi 0770 wifi wifi
     chmod 0770 /data/misc/wifi
-	mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     mkdir /data/wifi 0770 wifi wifi
     chmod 0660 /data/misc/wifi/wpa_supplicant.conf
@@ -231,8 +221,6 @@ loglevel 3
     chmod 0662 /dev/log/radio
     chmod 0662 /dev/log/main
 
-    	
-
     # create fota delta dir
     mkdir /data/fota 0777 root root
     chmod 1777 /data/fota
@@ -260,13 +248,11 @@ loglevel 3
     chown radio radio /dev/multipdp
     chmod 0777 /dev/fmradio
 
-	# change mode with sticky-bit for AT&T
-	chmod 1777 /cache/log
-	chmod 1777 /efs/imei
+    # change mode with sticky-bit for AT&T
+    chmod 1777 /cache/log
+    chmod 1777 /efs/imei
 
 # mount modules
-# insmod /lib/modules/dpram.ko
-# insmod /lib/modules/multipdp.ko
     insmod /lib/modules/onedram.ko
     insmod /lib/modules/svnet.ko
     insmod /lib/modules/modemctl.ko
@@ -326,17 +312,6 @@ on boot
     setprop ro.CONTENT_PROVIDER_ADJ 14
     setprop ro.EMPTY_APP_ADJ 15
 
-# Define the memory thresholds at which the above process classes will
-# be killed.  These numbers are in pages (4k).
-#    setprop ro.FOREGROUND_APP_MEM 2560
-#    setprop ro.VISIBLE_APP_MEM 4096
-#    setprop ro.SECONDARY_SERVER_MEM 6144
-#    setprop ro.BACKUP_APP_MEM 6144
-#    setprop ro.HOME_APP_MEM 6144
-#    setprop ro.HIDDEN_APP_MEM 11264
-#    setprop ro.CONTENT_PROVIDER_MEM 13312
-#    setprop ro.EMPTY_APP_MEM 16384
-
     setprop ro.FOREGROUND_APP_MEM 2560
     setprop ro.VISIBLE_APP_MEM 4096
     setprop ro.SECONDARY_SERVER_MEM 6144
@@ -346,19 +321,15 @@ on boot
     setprop ro.CONTENT_PROVIDER_MEM 13312
     setprop ro.EMPTY_APP_MEM 16384
 
-
-	
-	setprop wifi.interface "eth0"
-	setprop ro.bt.bdaddr_path "/data/misc/bluetooth/bt_addr"
+    setprop wifi.interface "eth0"
+    setprop ro.bt.bdaddr_path "/data/misc/bluetooth/bt_addr"
 
 # Write value must be consistent with the above properties.
 # Note that the driver only supports 6 slots, so we have HOME_APP at the
 # same memory level as services.
     write /sys/module/lowmemorykiller/parameters/adj 0,1,2,7,14,15
-
     write /proc/sys/vm/overcommit_memory 1
     write /proc/sys/vm/min_free_order_shift 4
-#   write /sys/module/lowmemorykiller/parameters/minfree 1536,2048,4096,5120,5632,6144
     write /sys/module/lowmemorykiller/parameters/minfree 2560,4096,6144,11264,13312,16384
 
     # Set init its forked children's oom_adj.
@@ -385,14 +356,13 @@ on boot
     chown radio system /sys/power/state
     chown radio system /sys/power/wake_lock
     chown radio system /sys/power/wake_unlock
-	chown radio system /sys/power/dvfslock_ctrl     
+    chown radio system /sys/power/dvfslock_ctrl     
     chmod 0660 /sys/power/state
     chmod 0660 /sys/power/wake_lock
     chmod 0660 /sys/power/wake_unlock
-	chmod 0660 /sys/power/dvfslock_ctrl    		
+    chmod 0660 /sys/power/dvfslock_ctrl    		
     chown system system /sys/class/timed_output/vibrator/enable
     chown system system /sys/class/leds/keyboard-backlight/brightness
-#    chown system system /sys/class/leds/lcd-backlight/brightness
     chown system system /sys/class/backlight/s5p_bl/brightness
     chown system system /sys/class/leds/button-backlight/brightness
     chown system system /sys/class/leds/jogball-backlight/brightness
@@ -418,21 +388,19 @@ on boot
     chown system system /sys/kernel/ipv4/tcp_rmem_max
     chown root radio /proc/cmdline
 
-
-
 # NAGSM_ANDROID_FRWK_JUSTIN_20101023 : Merge for new Sensor - Start
 #magnetic sensor Asahi-Kashei     
-	chown system system /dev/kr3dh_accel
-	chown system system /dev/akm8975_dev
-	chown system system /dev/akm8975_aot
+    chown system system /dev/kr3dh_accel
+    chown system system /dev/akm8975_dev
+    chown system system /dev/akm8975_aot
     chown system system /dev/light
     chown system system /dev/proximity
     chown system system /dev/l3g4200d
     chown system system /dev/i2c-1
 
-	chmod 0660 /dev/kr3dh_accel
+    chmod 0660 /dev/kr3dh_accel
     chmod 0660 /dev/akm8975_dev    
-	chmod 0660 /dev/akm8975_aot   
+    chmod 0660 /dev/akm8975_aot   
     chmod 0660 /dev/light    
     chmod 0660 /dev/proximity    
     chmod 0660 /dev/l3g4200d
@@ -489,55 +457,37 @@ on boot
     chown bluetooth bluetooth /sys/class/rfkill/rfkill1/state 
 
     chmod 6771 /system/bin/brcm_dutMode
-# +++++++++++++++++++++++++++++++++++++++++++
+
 # for datarouter
     chown system system /dev/ttygs0
     chown system system /dev/dun
-    
-         
- # +++++++++++++++++++++++++++++++++++++++++++
 
+# gps
+    chown system system /dev/s3c2410_serial1
+    chmod 0770 /dev/s3c2410_serial1
+    chown system system /system/xbin/ste-cg29xx_ctrl
+    chmod 0770 /system/xbin/ste-cg29xx_ctrl
+    mkdir /data/gps 770 system system
+    chown system system /data/gps
+    chmod 770 /data/GPS_NV_Data.bin
+    chmod 770 /data/GPS_UTC_Calib.bin
+    chown system system /dev/cg2900_audio
+    chmod 0770 /dev/cg2900_audio
+    chown system system /dev/cg2900_bt_audio
+    chmod 0770 /dev/cg2900_bt_audio
+    chown system system /dev/cg2900_core
+    chmod 0770 /dev/cg2900_core	  
+    chown system system /dev/cg2900_driver0
+    chmod 0770 /dev/cg2900_driver0
+    chown system system /dev/cg2900_fm_audio
+    chmod 0770 /dev/cg2900_fm_audio
+    chown system system /dev/cg2900_gnss
+    chmod 0770 /dev/cg2900_gnss
+    chown system system /dev/cg2900_hci_logger
+    chmod 0770 /dev/cg2900_hci_logger	  
+    chown system system /dev/cg2900_us_ctrl
+    chmod 0770 /dev/cg2900_us_ctrl	 
 
-# +STE GPS Daemon
-# GPS_CHIPSET_STE_GNS7560
-# create data/gps for GPS demon
-#    chown root system /dev/s3c2410_serial1
-#    chmod 660 /dev/s3c2410_serial1
-#    mkdir /data/gps 771 system system
-#    chown system system /data/gps
-#    chown root system /sys/class/gpio/gpio104/value
-#    chmod 664 /sys/class/gpio/gpio104/value
-#    chown root system /sys/class/gpio/gpio105/value
-#    chmod 664 /sys/class/gpio/gpio105/value
-# GPS_CHIPSET_STE_CG2900  
-#STE: Added for CG2900 Support	
-#+Scott.Re-setup permission right
-      chown system system /dev/s3c2410_serial1
-      chmod 0770 /dev/s3c2410_serial1
-      chown system system /system/xbin/ste-cg29xx_ctrl
-      chmod 0770 /system/xbin/ste-cg29xx_ctrl
-      mkdir /data/gps 770 system system
-      chown system system /data/gps
-      chmod 770 /data/GPS_NV_Data.bin
-      chmod 770 /data/GPS_UTC_Calib.bin
-  chown system system /dev/cg2900_audio
-      chmod 0770 /dev/cg2900_audio
-	  chown system system /dev/cg2900_bt_audio
-      chmod 0770 /dev/cg2900_bt_audio
-      chown system system /dev/cg2900_core
-      chmod 0770 /dev/cg2900_core	  
-      chown system system /dev/cg2900_driver0
-      chmod 0770 /dev/cg2900_driver0
-	  chown system system /dev/cg2900_fm_audio
-      chmod 0770 /dev/cg2900_fm_audio
-      chown system system /dev/cg2900_gnss
-      chmod 0770 /dev/cg2900_gnss
-      chown system system /dev/cg2900_hci_logger
-      chmod 0770 /dev/cg2900_hci_logger	  
-	  chown system system /dev/cg2900_us_ctrl
-      chmod 0770 /dev/cg2900_us_ctrl	 
-
- 
     class_start default
 
 ## Daemon processes to be run by init.
@@ -546,10 +496,6 @@ service console /system/bin/sh
     user shell
     group shell system log
     console
-
-service noplaylogos /system/bin/false
-    user root
-    oneshot
 
 # adbd is controlled by the persist.service.adb.enable system property
 service adbd /sbin/adbd
@@ -635,11 +581,11 @@ service killmediaserver /system/bin/killmediaserver
     oneshot
 #to prevent lockup issue during poweron/off test
 
-#service bootanim /system/bin/bootanimation
-#    user graphics
-#    group graphics
-#    disabled
-#    oneshot
+service bootanim /system/bin/bootanimation
+    user graphics
+    group graphics
+    disabled
+    oneshot
 
 service wpa_supplicant /system/bin/wpa_supplicant -Dwext -ieth0 -c/data/wifi/bcm_supp.conf
    disabled
@@ -648,13 +594,6 @@ service wpa_supplicant /system/bin/wpa_supplicant -Dwext -ieth0 -c/data/wifi/bcm
 service dhcpcd /system/bin/dhcpcd eth0
    disabled
    oneshot
-
-# +STE GPS Daemon
-#GPS_CHIPSET_STE_GNS7560
-#service agpsd /system/bin/agpsd
-#     user system
-#     group system inet
-#     oneshot
 	 
 #for WiFi MFG(TestMode)
 service mfgloader /system/bin/mfgloader
@@ -664,24 +603,20 @@ service mfgloader /system/bin/mfgloader
 service wlservice /system/bin/wlservice
     disabled
     oneshot
-# end of wifi
 
 service dbus /system/bin/dbus-daemon --system --nofork
     socket dbus stream 660 bluetooth bluetooth
     user bluetooth
     group bluetooth net_bt_admin
 
-# +++++++++++++++++++++++++++++++++++++++++++
-# for Broadcom Bluetooth
- # Start BTLD -----------------------------------------
-service btld /system/bin/logwrapper /system/bin/btld -hb 3000000 -hp /dev/s3c2410_serial0 -lpm 1
-    # init.rc does not yet support applying capabilities, so run as root and
-    # let btld drop uid to bluetooth with the right linux capabilities
+# bluetooth
+service hciattach /system/bin/hciattach /dev/s3c2410_serial0 any
+#service hciattach /system/bin/brcm_patchram_plus --enable_hci --enable_lpm --baudrate 3000000 --patchram /vendor/firmware/bcm4329.hcd /dev/s3c2410_serial0
+    user bluetooth
     group bluetooth net_bt_admin
     disabled
     oneshot
 
-# Start DTUN OBEXD  -----------------------------------------
 service obexd /system/bin/logwrapper /system/bin/obexd
     #socket bluetooth stream 660 bluetooth bluetooth
     #socket dbus_bluetooth stream 660 bluetooth bluetooth
@@ -692,7 +627,6 @@ service obexd /system/bin/logwrapper /system/bin/obexd
     disabled
     oneshot
 
- # Start BLUETOOTHD  -----------------------------------------
 service bluetoothd /system/bin/logwrapper /system/bin/bluetoothd -n -d 
     socket bluetooth stream 660 bluetooth bluetooth
     socket dbus_bluetooth stream 660 bluetooth bluetooth
@@ -700,7 +634,6 @@ service bluetoothd /system/bin/logwrapper /system/bin/bluetoothd -n -d
     # let bludtoothd drop uid to bluetooth with the right linux capabilities
     group bluetooth net_bt_admin misc
     disabled
-# +++++++++++++++++++++++++++++++++++++++++++
 
 service hfag /system/bin/sdptool add --channel=10 HFAG
     user bluetooth
@@ -729,18 +662,13 @@ service pbap /system/bin/sdptool add --channel=19 PBAP
 service installd /system/bin/installd
     socket installd stream 600 system system
 
-service flash_recovery /system/etc/install-recovery.sh
-    oneshot
 
-# NAGSM_ANDROID_FRWK_JUSTIN_20101023 : Merge for new Sensor - Start
-#magnetic sensor yamaha
+# magnetic sensor akmd8975
 service akmd8975 /system/bin/akmd8975
 	user system
 	group system
 	oneshot
-# NAGSM_ANDROID_FRWK_JUSTIN_20101023 : Merge for new Sensor - End
 
-   
 service racoon /system/bin/racoon
     socket racoon stream 600 system system
     # racoon will setuid to vpn after getting necessary resources.
@@ -765,41 +693,23 @@ service immvibed /system/bin/immvibed
     group shell
     oneshot
 
-
 service tvout /system/bin/tvoutserver
     user system
     group system log
-
 
 service dumpstate /system/bin/dumpstate -s
     socket dumpstate stream 0660 shell log
     disabled
     oneshot
 
-#GPS_CHIPSET_STE_CG2900
 # +STE UART Contol Application
 service ste-cg29xx_ctrl /system/xbin/ste-cg29xx_ctrl -b 115200 /dev/s3c2410_serial1
      user system
      group system misc 
      oneshot
 
-# +STE GPS Daemon
-#GPS_CHIPSET_STE_CG2900
+# GPS_CHIPSET_STE_CG2900
 service agpsd /system/bin/agpsd
      user system
      group system inet
      oneshot
-
-# Test command for stress test
-#service dfta /system/bin/sh /sbin/dfta.sh
-#  oneshot
-
-service run_parts /voodoo/scripts/run-parts.sh /system/etc/init.d
-  oneshot 
-
-
-service bootanim /system/bin/bootanimation
-			user graphics
-			group graphics
-			disabled
-			oneshot
