@@ -20,12 +20,12 @@ loglevel 3
     export BOOTCLASSPATH /system/framework/core.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/core-junit.jar
 
     # ko files for 3D
-    insmod /lib/modules/pvrsrvkm.ko
-    insmod /lib/modules/s3c_lcd.ko
-    insmod /lib/modules/s3c_bc.ko
+    insmod /system/lib/modules/pvrsrvkm.ko
+    insmod /system/lib/modules/s3c_lcd.ko
+    insmod /system/lib/modules/s3c_bc.ko
 
     # ko files for vibrator
-    insmod /lib/modules/vibrator.ko
+    insmod /system/lib/modules/vibrator.ko
 
 # Backward compatibility
     symlink /system/etc /etc
