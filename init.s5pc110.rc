@@ -1,0 +1,8 @@
+on boot
+
+# Include extra init file
+    import /system/etc/init.local.rc
+    import /device.rc
+
+# Run sysinit
+    exec /system/bin/sysinit
