@@ -11,6 +11,7 @@ on init
     
     insmod /lib/modules/fsr.ko
     insmod /lib/modules/fsr_stl.ko
+    insmod /lib/modules/param.ko
 
     mkdir /boot
     mkdir /sdcard

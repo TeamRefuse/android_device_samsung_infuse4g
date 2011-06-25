@@ -138,7 +138,8 @@ PRODUCT_COPY_FILES += \
     device/samsung/infuse4g/modules/j4fs.ko:root/lib/modules/j4fs.ko \
     device/samsung/infuse4g/modules/param.ko:root/lib/modules/param.ko \
     device/samsung/infuse4g/modules/rfs_fat.ko:root/lib/modules/rfs_fat.ko \
-    device/samsung/infuse4g/modules/rfs_glue.ko:root/lib/modules/rfs_glue.ko
+    device/samsung/infuse4g/modules/rfs_glue.ko:root/lib/modules/rfs_glue.ko \
+    device/samsung/infuse4g/modules/storage.ko:recovery/lib/modules/storage.ko
 
 
 #recovery
@@ -148,7 +149,8 @@ PRODUCT_COPY_FILES += \
     device/samsung/infuse4g/modules/j4fs.ko:recovery/lib/modules/j4fs.ko \
     device/samsung/infuse4g/modules/param.ko:recovery/lib/modules/param.ko \
     device/samsung/infuse4g/modules/rfs_fat.ko:recovery/root/lib/modules/rfs_fat.ko \
-    device/samsung/infuse4g/modules/rfs_glue.ko:recovery/root/lib/modules/rfs_glue.ko
+    device/samsung/infuse4g/modules/rfs_glue.ko:recovery/root/lib/modules/rfs_glue.ko \
+    device/samsung/infuse4g/modules/storage.ko:recovery/lib/modules/storage.ko
 
 #system
 PRODUCT_COPY_FILES += \
@@ -159,7 +161,6 @@ PRODUCT_COPY_FILES += \
     device/samsung/infuse4g/modules/pvrsrvkm.ko:system/lib/modules/pvrsrvkm.ko \
     device/samsung/infuse4g/modules/s3c_lcd.ko:system/lib/modules/s3c_lcd.ko \
     device/samsung/infuse4g/modules/s3c_bc.ko:system/lib/modules/s3c_bc.ko \
-    device/samsung/infuse4g/modules/storage.ko:system/lib/modules/storage.ko \
     device/samsung/infuse4g/modules/Si4709_driver.ko:system/lib/modules/Si4709_driver.ko \
     device/samsung/infuse4g/modules/svnet.ko:system/lib/modules/svnet.ko \
     device/samsung/infuse4g/modules/vibrator.ko:system/lib/modules/vibrator.ko
