@@ -19,17 +19,7 @@ loglevel 3
     export SD_EXT_DIRECTORY /sd-ext
     export BOOTCLASSPATH /system/framework/core.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/core-junit.jar
 
-    # ko files for 3D
-    insmod /system/lib/modules/pvrsrvkm.ko
-    insmod /system/lib/modules/s3c_lcd.ko
-    insmod /system/lib/modules/s3c_bc.ko
 
-    # ko files for vibrator
-    insmod /system/lib/modules/vibrator.ko
-
-    # ko files for Fm radio
-    insmod /system/lib/modules/Si4709_driver.ko
-	
 # Backward compatibility
     symlink /system/etc /etc
     symlink /sys/kernel/debug /d
@@ -51,7 +41,7 @@ loglevel 3
 
 # parameter block
     mkdir /mnt/.lfs 0755 root root
-    insmod /system/lib/modules/j4fs.ko
+    insmod /lib/modules/j4fs.ko
     mount j4fs /dev/block/stl6 /mnt/.lfs
     insmod /lib/modules/param.ko
 
@@ -244,7 +234,7 @@ loglevel 3
     chown radio radio /dev/dpram0
     chown radio radio /dev/dpram1
     chown radio radio /dev/dpram2
-    chown radio radio /dev/onedram_rfs
+    chown radio radio /dev/nedram_rfs
     chown radio radio /dev/multipdp
     chmod 0777 /dev/fmradio
 
@@ -253,10 +243,21 @@ loglevel 3
     chmod 1777 /efs/imei
 
 # mount modules
-    insmod /lib/modules/onedram.ko
+    # ko files for 3D
+    insmod /system/lib/modules/pvrsrvkm.ko
+    insmod /system/lib/modules/s3c_lcd.ko
+    insmod /system/lib/modules/s3c_bc.ko
+
+    # ko files for vibrator
+    insmod /system/lib/modules/vibrator.ko
+
+    # ko files for Fm radio
+    insmod /system/lib/modules/Si4709_driver.ko
+	
+    insmod /system/lib/modules/onedram.ko
     insmod /system/lib/modules/svnet.ko
-    insmod /lib/modules/modemctl.ko
-    insmod /lib/modules/storage.ko
+    insmod /system/lib/modules/modemctl.ko
+    insmod /system/lib/modules/storage.ko
     insmod /system/lib/modules/bthid.ko
 
     # permissions for MTP device node
@@ -513,7 +514,7 @@ on property:persist.service.adb.enable=1
     start adbd
 
 on property:persist.service.adb.enable=0
-    stop adbd
+    start adbd
 
 # 3D init
 service pvrsrvinit /system/bin/pvrsrvinit

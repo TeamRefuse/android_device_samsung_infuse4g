@@ -135,31 +135,34 @@ PRODUCT_LOCALES := hdpi
 PRODUCT_COPY_FILES += \
     device/samsung/infuse4g/modules/fsr.ko:root/lib/modules/fsr.ko \
     device/samsung/infuse4g/modules/fsr_stl.ko:root/lib/modules/fsr_stl.ko \
-    device/samsung/infuse4g/modules/rfs_glue.ko:root/lib/modules/rfs_glue.ko \
+    device/samsung/infuse4g/modules/j4fs.ko:root/lib/modules/j4fs.ko \
+    device/samsung/infuse4g/modules/param.ko:root/lib/modules/param.ko \
     device/samsung/infuse4g/modules/rfs_fat.ko:root/lib/modules/rfs_fat.ko \
-    device/samsung/infuse4g/modules/onedram.ko:root/lib/modules/onedram.ko \
-    device/samsung/infuse4g/modules/modemctl.ko:root/lib/modules/modemctl.ko \
-    device/samsung/infuse4g/modules/storage.ko:root/lib/modules/storage.ko
+    device/samsung/infuse4g/modules/rfs_glue.ko:root/lib/modules/rfs_glue.ko
 
 
 #recovery
 PRODUCT_COPY_FILES += \
     device/samsung/infuse4g/modules/fsr.ko:recovery/root/lib/modules/fsr.ko \
     device/samsung/infuse4g/modules/fsr_stl.ko:recovery/root/lib/modules/fsr_stl.ko \
-    device/samsung/infuse4g/modules/rfs_glue.ko:recovery/root/lib/modules/rfs_glue.ko \
-    device/samsung/infuse4g/modules/rfs_fat.ko:recovery/root/lib/modules/rfs_fat.ko
+    device/samsung/infuse4g/modules/j4fs.ko:recovery/lib/modules/j4fs.ko \
+    device/samsung/infuse4g/modules/param.ko:recovery/lib/modules/param.ko \
+    device/samsung/infuse4g/modules/rfs_fat.ko:recovery/root/lib/modules/rfs_fat.ko \
+    device/samsung/infuse4g/modules/rfs_glue.ko:recovery/root/lib/modules/rfs_glue.ko
 
 #system
 PRODUCT_COPY_FILES += \
+    device/samsung/infuse4g/modules/bthid.ko:system/lib/modules/bthid.ko \
     device/samsung/infuse4g/modules/dhd.ko:system/lib/modules/dhd.ko \
+    device/samsung/infuse4g/modules/modemctl.ko:system/lib/modules/modemctl.ko \
+    device/samsung/infuse4g/modules/onedram.ko:system/lib/modules/onedram.ko \
     device/samsung/infuse4g/modules/pvrsrvkm.ko:system/lib/modules/pvrsrvkm.ko \
     device/samsung/infuse4g/modules/s3c_lcd.ko:system/lib/modules/s3c_lcd.ko \
     device/samsung/infuse4g/modules/s3c_bc.ko:system/lib/modules/s3c_bc.ko \
-    device/samsung/infuse4g/modules/vibrator.ko:system/lib/modules/vibrator.ko \
+    device/samsung/infuse4g/modules/storage.ko:system/lib/modules/storage.ko \
     device/samsung/infuse4g/modules/Si4709_driver.ko:system/lib/modules/Si4709_driver.ko \
-    device/samsung/infuse4g/modules/bthid.ko:system/lib/modules/bthid.ko \
-    device/samsung/infuse4g/modules/j4fs.ko:system/lib/modules/j4fs.ko \
-    device/samsung/infuse4g/modules/svnet.ko:system/lib/modules/svnet.ko
+    device/samsung/infuse4g/modules/svnet.ko:system/lib/modules/svnet.ko \
+    device/samsung/infuse4g/modules/vibrator.ko:system/lib/modules/vibrator.ko
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
     LOCAL_KERNEL := device/samsung/infuse4g/kernel
