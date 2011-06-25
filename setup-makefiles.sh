@@ -83,7 +83,7 @@ EOF
 
 
 mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/overlay/packages/apps/Launcher2/res/layout
-(cat << EOF) | sed s/__DEVICE__/$DEVICE/g | sed s/__MANUFACTURER__/$MANUFACTURER/g > ../../../vendor/$MANUFACTURER/$COMMON/overlay/packages/apps/Launcher2/res/layout/all_apps.xml
+(cat << EOF) | sed s/__DEVICE__/$DEVICE/g | sed s/__MANUFACTURER__/$MANUFACTURER/g > ../../../vendor/$MANUFACTURER/$DEVICE/overlay/packages/apps/Launcher2/res/layout/all_apps.xml
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2010 The Android Open Source Project
 

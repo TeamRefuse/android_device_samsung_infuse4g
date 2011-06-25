@@ -49,8 +49,8 @@ PRODUCT_COPY_FILES := \
 # Init files
 PRODUCT_COPY_FILES += \
 	device/samsung/infuse4g/init.rc:root/init.rc \
-	#device/samsung/infuse4g/init.s5pc110.rc:root/init.s5pc110.rc \
-	device/samsung/infuse4g/ueventd.s5pc110.rc:root/ueventd.s5pc110.rc
+	device/samsung/infuse4g/init.dempsey.rc:root/init.dempsey.rc \
+	device/samsung/infuse4g/ueventd.dempsey.rc:root/ueventd.dempsey.rc
 
 
 # Prebuilt kl keymaps
@@ -72,6 +72,11 @@ PRODUCT_PACKAGES += \
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
 	device/samsung/infuse4g/media_profiles.xml:system/etc/media_profiles.xml
+
+# Libs
+PRODUCT_PACKAGES += \
+	libcamera \
+	libstagefrighthw
 
 # apns config file
 PRODUCT_COPY_FILES += \
