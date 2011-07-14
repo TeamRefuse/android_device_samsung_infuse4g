@@ -16,6 +16,7 @@
 
 # for Sensor HAL
 /dev/yamaha_compass       0660   system     system
+/dev/akm8973              0660   system     system
 /dev/accelerometer        0660   system     system
 
 # for GPS

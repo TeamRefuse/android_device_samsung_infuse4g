@@ -18,6 +18,7 @@ on boot
     insmod /system/lib/modules/svnet.ko
     insmod /system/lib/modules/modemctl.ko
     insmod /system/lib/modules/bthid.ko
+    insmod /system/lib/modules/tun.ko
 
     mount debugfs /sys/kernel/debug /sys/kernel/debug
 

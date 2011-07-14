@@ -11,7 +11,7 @@ test_mount()
 	if ! /tmp/busybox mount -t ext4 /dev/block/$2 /$1; then
              umount_format $1 $2
 	else 
-           echo "Partition is already EXT4."
+           echo "Partition $1 is already EXT4."
         fi
 }
 
@@ -25,7 +25,7 @@ umount_format()
                 echo "Successfully converted $1 on $2"
         else
                 echo "Cannot unmount $1 on $2"
-                exit $;
+                exit $?
         fi
 }
 
@@ -36,4 +36,4 @@ test_mount cache stl11
 test_mount dbdata stl10
 test_mount data mmcblk0p2
 
-exit 0;
+exit 0

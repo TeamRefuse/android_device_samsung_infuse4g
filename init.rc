@@ -5,7 +5,7 @@ on init
 
 sysclktz 0
 
-loglevel 9
+loglevel 8
 
 # setup the global environment
     export PATH /sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin
@@ -27,6 +27,11 @@ loglevel 9
     insmod /lib/modules/fsr_stl.ko
     insmod /lib/modules/rfs_glue.ko
     insmod /lib/modules/rfs_fat.ko
+
+# Param block
+    mkdir /mnt/.lfs 0755 root root
+    insmod /lib/modules/j4fs.ko
+    mount j4fs /dev/block/stl6 /mnt/.lfs
     insmod /lib/modules/param.ko
 
 # Backward compatibility

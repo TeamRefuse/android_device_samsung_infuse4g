@@ -15,6 +15,7 @@
 # limitations under the License.
 
 DEVICE=infuse4g
+COMMON=aries-common
 MANUFACTURER=samsung
 
 mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE
@@ -47,9 +48,10 @@ PRODUCT_COPY_FILES := \\
     packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:/system/etc/permissions/android.software.live_wallpaper.xml
 
 # Pick up overlay for features that depend on non-open-source files
-DEVICE_PACKAGE_OVERLAYS := vendor/__MANUFACTURER__/__DEVICE__/overlay
+DEVICE_PACKAGE_OVERLAYS := vendor/__MANUFACTURER__/aries-common/overlay
 
 \$(call inherit-product, vendor/__MANUFACTURER__/__DEVICE__/__DEVICE__-vendor-blobs.mk)
+\$(call inherit-product, vendor/__MANUFACTURER__/__COMMON__/aries-vendor-blobs.mk)
 EOF
 
 
@@ -70,7 +72,7 @@ EOF
 
 BOARD_GPS_LIBRARIES := libgps
 
-USE_CAMERA_STUB := true
+USE_CAMERA_STUB := false
 
 BOARD_USES_GENERIC_AUDIO := false
 
@@ -82,8 +84,8 @@ BOARD_NO_32BPP := false
 EOF
 
 
-mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/overlay/packages/apps/Launcher2/res/layout
-(cat << EOF) | sed s/__DEVICE__/$DEVICE/g | sed s/__MANUFACTURER__/$MANUFACTURER/g > ../../../vendor/$MANUFACTURER/$DEVICE/overlay/packages/apps/Launcher2/res/layout/all_apps.xml
+mkdir -p ../../../vendor/$MANUFACTURER/$COMMON/overlay/packages/apps/Launcher2/res/layout
+(cat << EOF) | sed s/__DEVICE__/$DEVICE/g | sed s/__MANUFACTURER__/$MANUFACTURER/g > ../../../vendor/$MANUFACTURER/$COMMON/overlay/packages/apps/Launcher2/res/layout/all_apps.xml
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2010 The Android Open Source Project
 

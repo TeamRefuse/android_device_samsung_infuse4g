@@ -48,7 +48,7 @@ TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/infuse4g/releaseto
 TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/infuse4g/releasetools/infuse4g_img_from_target_files
 
 # Camera
-USE_CAMERA_STUB := true
+USE_CAMERA_STUB := false
 ifeq ($(USE_CAMERA_STUB),false)
 BOARD_CAMERA_LIBRARIES := libcamera
 endif
@@ -62,9 +62,6 @@ BOARD_USES_OVERLAY := true
 BOARD_V4L2_DEVICE := /dev/video1
 BOARD_CAMERA_DEVICE := /dev/video0
 BOARD_SECOND_CAMERA_DEVICE := /dev/video2
-
-# FM Radio
-BOARD_HAVE_FM_RADIO := false
 
 BOARD_NAND_PAGE_SIZE := 4096 -s 128
 BOARD_KERNEL_BASE := 0x32000000
@@ -82,10 +79,10 @@ WPA_SUPPLICANT_VERSION := VER_0_6_X
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
 BOARD_WLAN_DEVICE := dhd
 WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/dhd.ko"
-WIFI_DRIVER_FW_STA_PATH     := "/vendor/firmware/fw_bcm4329.bin"
-WIFI_DRIVER_FW_AP_PATH      := "/vendor/firmware/fw_bcm4329_apsta.bin"
+WIFI_DRIVER_FW_STA_PATH     := "/vendor/firmware/bcm4330_sta.bin"
+WIFI_DRIVER_FW_AP_PATH      := "/vendor/firmware/bcm4330_aps.bin"
 WIFI_DRIVER_MODULE_NAME     :=  "dhd"
-WIFI_DRIVER_MODULE_ARG      :=  "firmware_path=/vendor/firmware/fw_bcm4329.bin nvram_path=/vendor/firmware/nvram_net.txt"
+WIFI_DRIVER_MODULE_ARG      :=  "firmware_path=/vendor/firmware/bcm4330_sta.bin nvram_path=/vendor/firmware/nvram_net.txt"
 
 # Vold
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
@@ -94,6 +91,9 @@ BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_CUSTOM_BOOTIMG_MK := device/samsung/infuse4g/shbootimg.mk
-TARGET_RECOVERY_PRE_COMMAND="echo 1 > /cache/.startrecovery; sync;"
+TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /cache/.startrecovery; sync;"
+
+# Include aries specific stuff
+-include device/samsung/aries-common/Android.mk
 
 TARGET_OTA_ASSERT_DEVICE := infuse4g,SGH-I997

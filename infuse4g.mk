@@ -38,7 +38,7 @@
 # These is the hardware-specific overlay, which points to the location
 # of hardware-specific resource overrides, typically the frameworks and
 # application settings that are stored in resourced.
-DEVICE_PACKAGE_OVERLAYS := device/samsung/infuse4g/overlay
+DEVICE_PACKAGE_OVERLAYS := device/samsung/aries-common/overlay
 
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES := \
@@ -50,24 +50,27 @@ PRODUCT_COPY_FILES := \
 PRODUCT_COPY_FILES += \
 	device/samsung/infuse4g/init.rc:root/init.rc \
 	device/samsung/infuse4g/init.dempsey.rc:root/init.dempsey.rc \
-	device/samsung/infuse4g/ueventd.dempsey.rc:root/ueventd.dempsey.rc
+	device/samsung/infuse4g/ueventd.dempsey.rc:root/ueventd.dempsey.rc \
+	device/samsung/infuse4g/setupenv.sh:recovery/root/sbin/setupenv.sh
 
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
-	device/samsung/infuse4g/cypress-touchkey.kl:system/usr/keylayout/cypress-touchkey.kl \
-	device/samsung/infuse4g/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
-	#device/samsung/infuse4g/aries-keypad.kl:system/usr/keylayout/aries-keypad.kl \
-	device/samsung/infuse4g/s3c-keypad.kl:system/usr/keylayout/s3c-keypad.kl
+	device/samsung/infuse4g/keylayout/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
+	device/samsung/infuse4g/keylayout/melfas-touchkey.kl:system/usr/keylayout/melfas-touchkey.kl \
+	device/samsung/infuse4g/keylayout/qt602240_ts_input.kl:system/usr/keylayout/qt602240_ts_input.kl \
+	device/samsung/infuse4g/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
+	device/samsung/infuse4g/keylayout/s3c-keypad.kl:system/usr/keylayout/s3c-keypad.kl
 
 # Generated kcm keymaps
 PRODUCT_PACKAGES := \
-       cypress-touchkey.kcm \
+       melfas-touchkey.kcm \
        s3c-keypad.kcm
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
-	make_ext4fs
+	make_ext4fs \
+	setup_fs
 
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
@@ -80,7 +83,7 @@ PRODUCT_PACKAGES += \
 
 # apns config file
 PRODUCT_COPY_FILES += \
-        vendor/cyanogen/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
+    vendor/cyanogen/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
@@ -88,7 +91,7 @@ PRODUCT_COPY_FILES += \
 	frameworks/base/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
 	frameworks/base/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
 	frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
-        frameworks/base/data/etc/android.hardware.location.xml:system/etc/permissions/android.hardware.location.xml \
+    frameworks/base/data/etc/android.hardware.location.xml:system/etc/permissions/android.hardware.location.xml \
 	frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
 	frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
 	frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
@@ -144,7 +147,6 @@ PRODUCT_COPY_FILES += \
     device/samsung/infuse4g/modules/param.ko:root/lib/modules/param.ko \
     device/samsung/infuse4g/modules/rfs_fat.ko:root/lib/modules/rfs_fat.ko \
     device/samsung/infuse4g/modules/rfs_glue.ko:root/lib/modules/rfs_glue.ko \
-    device/samsung/infuse4g/modules/storage.ko:recovery/lib/modules/storage.ko
 
 
 #recovery
@@ -155,7 +157,6 @@ PRODUCT_COPY_FILES += \
     device/samsung/infuse4g/modules/param.ko:recovery/lib/modules/param.ko \
     device/samsung/infuse4g/modules/rfs_fat.ko:recovery/root/lib/modules/rfs_fat.ko \
     device/samsung/infuse4g/modules/rfs_glue.ko:recovery/root/lib/modules/rfs_glue.ko \
-    device/samsung/infuse4g/modules/storage.ko:recovery/lib/modules/storage.ko
 
 #system
 PRODUCT_COPY_FILES += \
@@ -167,8 +168,11 @@ PRODUCT_COPY_FILES += \
     device/samsung/infuse4g/modules/s3c_lcd.ko:system/lib/modules/s3c_lcd.ko \
     device/samsung/infuse4g/modules/s3c_bc.ko:system/lib/modules/s3c_bc.ko \
     device/samsung/infuse4g/modules/Si4709_driver.ko:system/lib/modules/Si4709_driver.ko \
+    device/samsung/infuse4g/modules/storage.ko:system/lib/modules/storage.ko \
+    device/samsung/infuse4g/modules/tun.ko:system/lib/modules/tun.ko \
     device/samsung/infuse4g/modules/svnet.ko:system/lib/modules/svnet.ko \
     device/samsung/infuse4g/modules/vibrator.ko:system/lib/modules/vibrator.ko
+
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
     LOCAL_KERNEL := device/samsung/infuse4g/kernel
