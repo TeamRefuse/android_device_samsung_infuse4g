@@ -80,7 +80,7 @@ BOARD_WPA_SUPPLICANT_DRIVER := WEXT
 BOARD_WLAN_DEVICE := dhd
 WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/dhd.ko"
 WIFI_DRIVER_FW_STA_PATH     := "/vendor/firmware/bcm4330_sta.bin"
-WIFI_DRIVER_FW_AP_PATH      := "/vendor/firmware/bcm4330_aps.bin"
+WIFI_DRIVER_FW_AP_PATH      := "/vendor/firmware/bcm4330_sta.bin"
 WIFI_DRIVER_MODULE_NAME     :=  "dhd"
 WIFI_DRIVER_MODULE_ARG      :=  "firmware_path=/vendor/firmware/bcm4330_sta.bin nvram_path=/vendor/firmware/nvram_net.txt"
 
