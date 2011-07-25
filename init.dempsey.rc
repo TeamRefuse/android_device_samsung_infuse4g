@@ -3,22 +3,14 @@ on boot
     # insert modules
     insmod /system/lib/modules/storage.ko
 
-    # ko files for 3D
-    insmod /system/lib/modules/pvrsrvkm.ko
-    insmod /system/lib/modules/s3c_lcd.ko
-    insmod /system/lib/modules/s3c_bc.ko
-
     # ko files for vibrator
     insmod /system/lib/modules/vibrator.ko
 
-	# ko files for Fm radio
-	insmod /system/lib/modules/Si4709_driver.ko
-
-    insmod /system/lib/modules/onedram.ko
-    insmod /system/lib/modules/svnet.ko
-    insmod /system/lib/modules/modemctl.ko
+    insmod /system/lib/modules/dhd.ko
     insmod /system/lib/modules/bthid.ko
     insmod /system/lib/modules/tun.ko
+    insmod /system/lib/ansi_cprng.ko
+    insmod /system/lib/cifs.ko
 
     mount debugfs /sys/kernel/debug /sys/kernel/debug
 
