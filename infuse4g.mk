@@ -162,15 +162,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/samsung/infuse4g/modules/bthid.ko:system/lib/modules/bthid.ko \
     device/samsung/infuse4g/modules/dhd.ko:system/lib/modules/dhd.ko \
-    device/samsung/infuse4g/modules/modemctl.ko:system/lib/modules/modemctl.ko \
-    device/samsung/infuse4g/modules/onedram.ko:system/lib/modules/onedram.ko \
-    device/samsung/infuse4g/modules/pvrsrvkm.ko:system/lib/modules/pvrsrvkm.ko \
-    device/samsung/infuse4g/modules/s3c_lcd.ko:system/lib/modules/s3c_lcd.ko \
-    device/samsung/infuse4g/modules/s3c_bc.ko:system/lib/modules/s3c_bc.ko \
-    device/samsung/infuse4g/modules/Si4709_driver.ko:system/lib/modules/Si4709_driver.ko \
     device/samsung/infuse4g/modules/storage.ko:system/lib/modules/storage.ko \
     device/samsung/infuse4g/modules/tun.ko:system/lib/modules/tun.ko \
-    device/samsung/infuse4g/modules/svnet.ko:system/lib/modules/svnet.ko \
+    device/samsung/infuse4g/modules/cifs.ko:system/lib/modules/cifs.ko \
+    device/samsung/infuse4g/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
+    device/samsung/infuse4g/modules/ansi_cprng.ko:system/lib/modules/ansi_cprng.ko \
     device/samsung/infuse4g/modules/vibrator.ko:system/lib/modules/vibrator.ko
 
 
