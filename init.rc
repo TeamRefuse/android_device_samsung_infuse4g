@@ -127,7 +127,7 @@ on boot
     setprop ro.FOREGROUND_APP_ADJ 0
     setprop ro.VISIBLE_APP_ADJ 1
     setprop ro.PERCEPTIBLE_APP_ADJ 2
-    setprop.ro.HEAVY_WEIGHT_APP_ADJ 3
+    setprop ro.HEAVY_WEIGHT_APP_ADJ 3
     setprop ro.SECONDARY_SERVER_ADJ 4
     setprop ro.BACKUP_APP_ADJ 5
     setprop ro.HOME_APP_ADJ 6
