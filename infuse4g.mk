@@ -74,7 +74,18 @@ PRODUCT_PACKAGES += \
 
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
+	device/samsung/aries-common/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
 	device/samsung/infuse4g/media_profiles.xml:system/etc/media_profiles.xml
+
+
+# These are the OpenMAX IL modules
+ PRODUCT_PACKAGES += \
+ 	libSEC_OMX_Core.aries \
+	libOMX.SEC.AVC.Decoder.aries \
+ 	libOMX.SEC.M4V.Decoder.aries \
+	libOMX.SEC.M4V.Encoder.aries \
+	libOMX.SEC.AVC.Encoder.aries
+
 
 # Libs
 PRODUCT_PACKAGES += \

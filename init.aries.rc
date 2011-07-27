@@ -6,10 +6,8 @@ on boot
     # ko files for vibrator
     insmod /system/lib/modules/vibrator.ko
 
-    insmod /system/lib/modules/dhd.ko
     insmod /system/lib/modules/bthid.ko
     insmod /system/lib/modules/tun.ko
-    insmod /system/lib/ansi_cprng.ko
     insmod /system/lib/cifs.ko
 
     mount debugfs /sys/kernel/debug /sys/kernel/debug
