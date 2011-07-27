@@ -78,7 +78,7 @@ PRODUCT_COPY_FILES += \
 	device/samsung/infuse4g/media_profiles.xml:system/etc/media_profiles.xml
 
 PRODUCT_COPY_FILES += \
-	device/samsung/infuse4g/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.xml
+	device/samsung/infuse4g/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
 
 
 # These are the OpenMAX IL modules
