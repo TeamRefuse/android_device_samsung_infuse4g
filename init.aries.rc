@@ -138,9 +138,9 @@ on post-fs
     mkdir /data/misc/systemkeys 0700 system system
     mkdir /data/misc/vpn/profiles 0770 system system
     # give system access to wpa_supplicant.conf for backup and restore
-    mkdir /data/misc/wifi 0770 wifi wifi
-    chmod 0770 /data/misc/wifi
-    chmod 0660 /data/misc/wifi/wpa_supplicant.conf
+    mkdir /system/etc/wifi 0770 wifi wifi
+    chmod 0770 /system/etc/wifi
+    chmod 0660 /system/etc/wifi/wpa_supplicant.conf
     mkdir /data/local 0771 shell shell
     mkdir /data/local/tmp 0771 shell shell
     #mkdir /data/data 0771 system system
@@ -155,10 +155,7 @@ on post-fs
     mkdir /data/dalvik-cache 0771 system system
     chown system system /data/dalvik-cache
     chmod 0771 /data/dalvik-cache
-
-    mkdir /cache/dalvik-cache 0771 system system
-    chown system system /cache/dalvik-cache
-    chmod 0771 /cache/dalvik-cache
+    symlink /data/dalvik-cache /cache/dalvik-cache
 
     # create the lost+found directories, so as to enforce our permissions
     mkdir /data/lost+found 0770
@@ -193,7 +190,7 @@ service gpsd /system/vendor/bin/gpsd -c /vendor/etc/gps.xml
     user gps
     group system inet
 
-service wpa_supplicant /system/bin/wpa_supplicant -Dwext -ieth0 -c/data/misc/wifi/wpa_supplicant.conf
+service wpa_supplicant /system/bin/wpa_supplicant -Dwext -ieth0 -c/system/etc/wifi/wpa_supplicant.conf
     socket wpa_eth0 dgram 0660 wifi wifi
     disabled
     oneshot
@@ -207,7 +204,7 @@ service iprenew_eth0 /system/bin/dhcpcd -n
     oneshot
 
 service hciattach /system/bin/brcm_patchram_plus --enable_hci --enable_lpm \
-    --baudrate 3000000 --patchram /vendor/firmware/bcm4330.hcd /dev/s3c2410_serial0
+    --baudrate 3000000 --patchram /system/bin/BCM4330B1_002.001.003.0043.0061.hcd /dev/s3c2410_serial0
     user bluetooth
     group bluetooth net_bt_admin
     disabled

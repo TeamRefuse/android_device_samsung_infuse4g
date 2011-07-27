@@ -77,6 +77,9 @@ PRODUCT_COPY_FILES += \
 	device/samsung/aries-common/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
 	device/samsung/infuse4g/media_profiles.xml:system/etc/media_profiles.xml
 
+PRODUCT_COPY_FILES += \
+	device/samsung/infuse4g/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.xml
+
 
 # These are the OpenMAX IL modules
  PRODUCT_PACKAGES += \
