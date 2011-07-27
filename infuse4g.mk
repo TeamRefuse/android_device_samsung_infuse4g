@@ -49,8 +49,8 @@ PRODUCT_COPY_FILES := \
 # Init files
 PRODUCT_COPY_FILES += \
 	device/samsung/infuse4g/init.rc:root/init.rc \
-	device/samsung/infuse4g/init.dempsey.rc:root/init.dempsey.rc \
-	device/samsung/infuse4g/ueventd.dempsey.rc:root/ueventd.dempsey.rc \
+	device/samsung/infuse4g/init.aries.rc:root/init.aries.rc \
+	device/samsung/infuse4g/ueventd.aries.rc:root/ueventd.aries.rc \
 	device/samsung/infuse4g/setupenv.sh:recovery/root/sbin/setupenv.sh
 
 
