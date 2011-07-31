@@ -354,8 +354,8 @@ on post-fs
 #+Scott.Re-setup permission right
       chown system system /dev/s3c2410_serial1
       chmod 0770 /dev/s3c2410_serial1
-      chown system system /system/xbin/ste-cg29xx_ctrl
-      chmod 0770 /system/xbin/ste-cg29xx_ctrl
+      chown system system /system/vendor/bin/ste-cg29xx_ctrl
+      chmod 0770 /system/vendor/bin/ste-cg29xx_ctrl
       mkdir /data/gps 770 system system
       chown system system /data/gps
       chmod 770 /data/GPS_NV_Data.bin
@@ -383,8 +383,6 @@ service pvrsrvinit /system/vendor/bin/pvrsrvinit
     group root
     oneshot
 
-
-
 service wpa_supplicant /system/bin/wpa_supplicant -Dwext -ieth0 -c/data/misc/wifi/wpa_supplicant.conf
     socket wpa_eth0 dgram 0660 wifi wifi
     disabled
@@ -399,7 +397,6 @@ service iprenew_eth0 /system/bin/dhcpcd -n
     oneshot
 
 service hciattach /system/bin/hciattach /dev/s3c2410_serial0 any
-#service hciattach /system/bin/brcm_patchram_plus --enable_hci --enable_lpm --baudrate 3000000 --patchram /system/bin/BCM4330B1_002.001.003.0043.0061.hcd /dev/s3c2410_serial0
     user bluetooth
     group bluetooth net_bt_admin
     disabled

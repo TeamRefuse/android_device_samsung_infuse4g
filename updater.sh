@@ -12,7 +12,8 @@ test_mount()
              umount_format $1 $2
 	else 
            echo "Partition $1 is already EXT4."
-        fi
+           umount /$1
+    fi
 }
 
 umount_format()
@@ -32,8 +33,8 @@ umount_format()
 
 # check each partition
 test_mount system stl9
-test_mount cache stl11 
 test_mount dbdata stl10
 test_mount data mmcblk0p2
-
+test_mount cache stl11 
+/tmp/busybox mount -t ext4 /dev/block/stl11 /cache
 exit 0

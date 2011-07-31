@@ -53,7 +53,6 @@ PRODUCT_COPY_FILES += \
 	device/samsung/infuse4g/ueventd.aries.rc:root/ueventd.aries.rc \
 	device/samsung/infuse4g/setupenv.sh:recovery/root/sbin/setupenv.sh
 
-
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
 	device/samsung/infuse4g/keylayout/aries-keypad.kl:system/usr/keylayout/aries-keypad.kl \
@@ -64,7 +63,7 @@ PRODUCT_COPY_FILES += \
 	device/samsung/infuse4g/keylayout/sec_jack.kl:system/usr/keylayout/sec_jack.kl
 
 # Prebuilt kcm keymaps
-PRODUCT_COPY_FILES := \
+PRODUCT_COPY_FILES += \
 	device/samsung/infuse4g/keychars/aries-keypad.kcm.bin:system/usr/keychars/aries-keypad.kcm.bin \
 	device/samsung/infuse4g/keychars/Broadcom_Bluetooth_HID.kcm.bin:system/usr/keychars/Broadcom_Bluetooth_HID.kcm.bin \
 	device/samsung/infuse4g/keychars/melfas_touchkey.kcm.bin:system/usr/keychars/melfas_touchkey.kcm.bin \
