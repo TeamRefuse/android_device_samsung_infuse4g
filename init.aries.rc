@@ -37,19 +37,180 @@ on boot
 # phone
     setprop ro.telephony.call_ring.multiple 0
 
-# change permission for uart_switch
-    chown radio radio /sys/class/sec/uart_switch/UART_SEL/value
-    chown compass root /sys/class/input/input3/distortion
-    chown compass root /sys/class/input/input3/offsets
-    chown compass root /sys/class/input/input3/shape
-    chown compass root /sys/class/input/input3/threshold
-    chmod 660 /sys/class/sec/uart_switch/UART_SEL/value
+# for sensor control
+    chown system input /sys/class/input/input0/enable
+    chown system input /sys/class/input/input0/delay
+    chown system input /sys/class/input/input0/wake
+    chown system input /sys/class/input/input0/data
+    
+    chown system input /sys/class/input/input1/enable
+    chown system input /sys/class/input/input1/delay
+    chown system input /sys/class/input/input1/wake
+    chown system input /sys/class/input/input1/threshold
+    chown system input /sys/class/input/input1/distortion
+    chown system input /sys/class/input/input1/shape
+    chown system input /sys/class/input/input1/offsets
+    chown system input /sys/class/input/input1/filter_enable
+    chown system input /sys/class/input/input1/filter_len
+    chown system input /sys/class/input/input1/data
+    chown system input /sys/class/input/input1/status
+    chown system input /sys/class/input/input1/position
+    
+    chown system input /sys/class/input/input2/enable
+    chown system input /sys/class/input/input2/delay
+    chown system input /sys/class/input/input2/wake
+    chown system input /sys/class/input/input2/threshold
+    chown system input /sys/class/input/input2/distortion
+    chown system input /sys/class/input/input2/shape
+    chown system input /sys/class/input/input2/offsets
+    chown system input /sys/class/input/input2/filter_enable
+    chown system input /sys/class/input/input2/filter_len
+    chown system input /sys/class/input/input2/data
+    chown system input /sys/class/input/input2/status
+    chown system input /sys/class/input/input2/position
+    
+    chown system input /sys/class/input/input3/enable
+    chown system input /sys/class/input/input3/delay
+    chown system input /sys/class/input/input3/wake
+    chown system input /sys/class/input/input3/threshold
+    chown system input /sys/class/input/input3/distortion
+    chown system input /sys/class/input/input3/shape
+    chown system input /sys/class/input/input3/offsets
+    chown system input /sys/class/input/input3/filter_enable
+    chown system input /sys/class/input/input3/filter_len
+    chown system input /sys/class/input/input3/data
+    chown system input /sys/class/input/input3/status
+    chown system input /sys/class/input/input3/position
+    
+    chown system input /sys/class/input/input4/enable
+    chown system input /sys/class/input/input4/delay
+    chown system input /sys/class/input/input4/wake
+    chown system input /sys/class/input/input5/enable
+    chown system input /sys/class/input/input5/delay
+    chown system input /sys/class/input/input5/wake
+    chown system input /sys/class/input/input6/enable
+    chown system input /sys/class/input/input6/delay
+    chown system input /sys/class/input/input6/wake
+    chown system input /sys/class/input/input7/enable
+    chown system input /sys/class/input/input7/delay
+    chown system input /sys/class/input/input7/wake
+    chown system input /sys/class/input/input8/enable
+    chown system input /sys/class/input/input8/delay
+    chown system input /sys/class/input/input8/wake
+    chown system input /sys/class/input/input9/enable
+    chown system input /sys/class/input/input9/delay
+    chown system input /sys/class/input/input9/wake
+    chown system input /dev/i2c-12
 
-# change permission for compass
-    chown compass input /sys/class/input/input3/offsets
-    chown compass input /sys/class/input/input3/shape
-    chown compass input /sys/class/input/input3/distortion
-    chown compass input /sys/class/input/input3/threshold
+ #change permissions for modem 
+    chown radio system /sys/class/modemctl/xmm/control 
+    chown radio system /sys/class/net/svnet0/waketime
+    chown radio system /sys/class/net/svnet0/pdp/activate 
+    chown radio system /sys/class/net/svnet0/pdp/deactivate
+    chown radio system /sys/class/net/svnet0/pdp/suspend 
+    chown radio system /sys/class/net/svnet0/pdp/resume
+    #change permissions for USB
+    chown radio system /sys/class/sec/switch/usb_sel
+    chown radio system /sys/class/sec/switch/uart_sel
+    chown radio system /sys/class/sec/switch/usb_state
+    chown radio system /sys/class/sec/switch/disable_vbus
+    chmod 0664 /sys/devices/platform/android_usb/UsbMenuSel
+    chown radio system /sys/devices/platform/android_usb/UsbMenuSel
+    chmod 0664 /sys/devices/platform/android_usb/AskOnStatus
+    chown radio system /sys/devices/platform/android_usb/AskOnStatus
+ 
+    #change permissions for fuel gauge
+    chown radio system /sys/class/sec/fg_atcom_test/set_fuel_gauage_read
+    chown radio system /sys/class/sec/fg_atcom_test/set_fuel_gauage_reset
+ 
+    #change permissions for battery
+    chown radio system /sys/class/power_supply/battery/batt_vol
+    chown radio system /sys/class/power_supply/battery/batt_vol_adc
+    chown radio system /sys/class/power_supply/battery/batt_temp
+    chown radio system /sys/class/power_supply/battery/batt_temp_adc
+    chown radio system /sys/class/power_supply/battery/charging_source
+    chown radio system /sys/class/power_supply/battery/fg_soc
+    chown radio system /sys/class/power_supply/battery/reset_soc
+    chown radio system /sys/class/power_supply/battery/charging_mode_booting
+    chown radio system /sys/class/power_supply/battery/batt_temp_check
+    chown radio system /sys/class/power_supply/battery/batt_full_check
+    chown radio system /sys/class/power_supply/battery/batt_type
+
+    chown radio system /sys/class/power_supply/battery/batt_vol_adc_cal
+    chown radio system /sys/class/power_supply/battery/batt_temp_adc_cal
+    chown radio system /sys/class/power_supply/battery/batt_vol_adc_aver
+    chown radio system /sys/class/power_supply/battery/batt_test_mode
+    chown radio system /sys/class/power_supply/battery/batt_vol_aver
+    chown radio system /sys/class/power_supply/battery/batt_temp_aver
+    chown radio system /sys/class/power_supply/battery/batt_temp_adc_aver
+    chown radio system /sys/class/power_supply/battery/batt_v_f_adc
+    chown radio system /sys/class/power_supply/battery/batt_chg_current
+    chown radio system /sys/class/power_supply/battery/charging_source
+    chown radio system /sys/class/power_supply/battery/vibrator
+    chown radio system /sys/class/power_supply/battery/camera
+    chown radio radio /sys/class/power_supply/battery/mp3
+    chown radio radio /sys/class/power_supply/battery/video
+    chown radio system /sys/class/power_supply/battery/talk_gsm
+    chown radio system /sys/class/power_supply/battery/talk_wcdma
+    chown radio system /sys/class/power_supply/battery/data_call
+    chown radio system /sys/class/power_supply/battery/wifi
+    chown radio system /sys/class/power_supply/battery/gps
+    chown radio system /sys/class/power_supply/battery/device_state
+    chown radio system /sys/class/power_supply/battery/batt_compendation
+    chown radio system /sys/class/power_supply/battery/is_booting
+
+#for jack control
+    chown radio system /sys/class/jack/jack_selector/select_jack
+
+#change permissions for touch
+    chown radio system /sys/class/sec/qt602240_noise_test/set_refer0
+    chown radio system /sys/class/sec/qt602240_noise_test/set_delta0
+    chown radio system /sys/class/sec/qt602240_noise_test/set_refer1
+    chown radio system /sys/class/sec/qt602240_noise_test/set_delta1
+    chown radio system /sys/class/sec/qt602240_noise_test/set_refer2
+    chown radio system /sys/class/sec/qt602240_noise_test/set_delta2
+    chown radio system /sys/class/sec/qt602240_noise_test/set_refer3
+    chown radio system /sys/class/sec/qt602240_noise_test/set_delta3
+    chown radio system /sys/class/sec/qt602240_noise_test/set_refer4
+    chown radio system /sys/class/sec/qt602240_noise_test/set_delta4
+    chown radio system /sys/class/sec/qt602240_noise_test/set_referminmax 
+    chown radio system /sys/class/sec/qt602240_noise_test/set_deltaminmax 
+    chown radio system /sys/class/sec/qt602240_noise_test/set_threshould 
+    chown radio system /sys/class/sec/qt602240_atcom_test/set_qt_update 
+    chown radio system /sys/class/sec/qt602240_atcom_test/set_qt_firm_version 
+    chown radio system /sys/class/sec/qt602240_atcom_test/set_qt_firm_status 
+    chown radio system /sys/class/sec/qt602240_atcom_test/set_qt_firm_version_read
+    chown radio system /sys/class/touch/switch/set_power
+    chown radio system /sys/class/touch/switch/set_acquisition
+    chown radio system /sys/class/touch/switch/set_touchscreen 
+    chown radio system /sys/class/touch/switch/set_keyarray 
+    chown radio system /sys/class/touch/switch/set_total
+    chown radio system /sys/class/touch/switch/set_write
+    chown radio system /sys/class/touch/switch/set_noise
+    chown radio system /sys/class/touch/switch/set_grip  
+    chown radio system /sys/class/touch/qt_stylus/config_mode
+
+ #change permissions for lcd
+    chown radio system /sys/class/lcd/s5p_lcd/lcd_power
+    chown radio radio /sys/class/gammaset/switch_gammaset/gammaset_file_cmd
+    chown radio radio /sys/class/aclset/switch_aclset/aclset_file_cmd
+    chown radio system /sys/class/sec/sec_lcd/lcdtype_file_cmd
+    chown radio radio /sys/class/mdnieset_ui/switch_mdnieset_ui/mdnieset_ui_file_cmd
+    chown radio radio /sys/class/mdnieset_outdoor/switch_mdnieset_outdoor/mdnieset_outdoor_file_cmd
+
+ #change permissions for touchkey
+    chown radio system /sys/class/misc/melfas_touchkey/touch_version
+    chown radio system /sys/class/misc/melfas_touchkey/touch_update
+    chown radio system /sys/class/misc/melfas_touchkey/brightness
+    chown radio system /sys/class/misc/melfas_touchkey/enable_disable
+    
+    chown radio system /sys/devices/platform/s3c-keypad/key_pressed
+    
+    chown radio system /sys/class/misc/level/control
+
+    chown radio system /sys/class/sec/switch/tethering
+
+
 # create data/gps for GPS demon
     mkdir /data/gps 770 gps system
     chown system system /data/gps
@@ -147,11 +308,9 @@ on post-fs
     # give system access to wpa_supplicant.conf for backup and restore
     mkdir /data/misc/wifi 0770 wifi wifi
     chmod 0770 /data/misc/wifi
-    chmod 0770 /system/etc/wifi
-    chown system wifi /system/etc/wifi
-    chmod 0660 /system/etc/wifi/wpa_supplicant.conf
-    chown system wifi /system/etc/wifi/wpa_supplicant.conf
-    symlink /system/etc/wifi/wpa_supplicant.conf /data/misc/wifi/wpa_supplicant.conf
+    chown system wifi /data/misc/wifi
+    chmod 0660 /data/misc/wifi/wpa_supplicant.conf
+    chown system wifi /data/misc/wifi/wpa_supplicant.conf
     mkdir /data/local 0771 shell shell
     mkdir /data/local/tmp 0771 shell shell
     #mkdir /data/data 0771 system system
@@ -190,26 +349,43 @@ on post-fs
     chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
     chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 
+# GPS_CHIPSET_STE_CG2900  
+#STE: Added for CG2900 Support	
+#+Scott.Re-setup permission right
+      chown system system /dev/s3c2410_serial1
+      chmod 0770 /dev/s3c2410_serial1
+      chown system system /system/xbin/ste-cg29xx_ctrl
+      chmod 0770 /system/xbin/ste-cg29xx_ctrl
+      mkdir /data/gps 770 system system
+      chown system system /data/gps
+      chmod 770 /data/GPS_NV_Data.bin
+      chmod 770 /data/GPS_UTC_Calib.bin
+  chown system system /dev/cg2900_audio
+      chmod 0770 /dev/cg2900_audio
+	  chown system system /dev/cg2900_bt_audio
+      chmod 0770 /dev/cg2900_bt_audio
+      chown system system /dev/cg2900_core
+      chmod 0770 /dev/cg2900_core	  
+      chown system system /dev/cg2900_driver0
+      chmod 0770 /dev/cg2900_driver0
+	  chown system system /dev/cg2900_fm_audio
+      chmod 0770 /dev/cg2900_fm_audio
+      chown system system /dev/cg2900_gnss
+      chmod 0770 /dev/cg2900_gnss
+      chown system system /dev/cg2900_hci_logger
+      chmod 0770 /dev/cg2900_hci_logger	  
+	  chown system system /dev/cg2900_us_ctrl
+      chmod 0770 /dev/cg2900_us_ctrl
+
 # 3D init
 service pvrsrvinit /system/vendor/bin/pvrsrvinit
     user root
     group root
     oneshot
 
-# +STE UART Contol Application
-service ste-cg29xx_ctrl /system/vendor/bin/ste-cg29xx_ctrl -b 115200 /dev/s3c2410_serial1
-     user system
-    group system misc 
-     oneshot
 
-# +STE GPS Daemon
-#GPS_CHIPSET_STE_CG2900
-service agpsd /system/vendor/bin/agpsd
-     user system
-     group system inet
-     oneshot
 
-service wpa_supplicant /system/bin/wpa_supplicant -Dwext -ieth0 -c/system/etc/wifi/wpa_supplicant.conf
+service wpa_supplicant /system/bin/wpa_supplicant -Dwext -ieth0 -c/data/misc/wifi/wpa_supplicant.conf
     socket wpa_eth0 dgram 0660 wifi wifi
     disabled
     oneshot
@@ -279,6 +455,12 @@ service dbus /system/bin/dbus-daemon --system --nofork
     user bluetooth
     group bluetooth net_bt_admin
 
+service btld /system/vendor/bin/btld -hb 3000000 -hp /dev/s3c2410_serial0 -lpm 1
+    user root
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
+
 service bluetoothd /system/bin/bluetoothd -n
     socket bluetooth stream 660 bluetooth bluetooth
     socket dbus_bluetooth stream 660 bluetooth bluetooth
@@ -333,6 +515,11 @@ service keystore /system/bin/keystore /data/misc/keystore
     group keystore
     socket keystore stream 666
 
+service immvibed /system/vendor/bin/immvibed
+    user shell
+    group shell
+    oneshot
+
 service dumpstate /system/bin/dumpstate -s
     socket dumpstate stream 0660 shell log
     disabled
@@ -349,6 +536,19 @@ service dumpstate /system/bin/dumpstate -s
 service tvout /system/bin/tvoutserver
     user system
     group graphics
+
+# +STE UART Contol Application
+service ste-cg29xx_ctrl /system/vendor/bin/ste-cg29xx_ctrl -b 115200 /dev/s3c2410_serial1
+     user system
+    group system misc 
+     oneshot
+
+# +STE GPS Daemon
+#GPS_CHIPSET_STE_CG2900
+service agpsd /system/vendor/bin/agpsd
+     user system
+     group system inet
+     oneshot
 
 service console /system/bin/sh
     console
