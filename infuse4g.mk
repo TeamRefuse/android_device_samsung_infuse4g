@@ -56,16 +56,20 @@ PRODUCT_COPY_FILES += \
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
-	device/samsung/infuse4g/keylayout/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
-	device/samsung/infuse4g/keylayout/melfas-touchkey.kl:system/usr/keylayout/melfas-touchkey.kl \
-	device/samsung/infuse4g/keylayout/qt602240_ts_input.kl:system/usr/keylayout/qt602240_ts_input.kl \
+	device/samsung/infuse4g/keylayout/aries-keypad.kl:system/usr/keylayout/aries-keypad.kl \
 	device/samsung/infuse4g/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
-	device/samsung/infuse4g/keylayout/s3c-keypad.kl:system/usr/keylayout/s3c-keypad.kl
+	device/samsung/infuse4g/keylayout/Broadcom_Bluetooth_HID.kl:system/usr/keylayout/Broadcom_Bluetooth_HID.kl \
+	device/samsung/infuse4g/keylayout/melfas_touchkey.kl:system/usr/keylayout/melfas_touchkey.kl \
+	device/samsung/infuse4g/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
+	device/samsung/infuse4g/keylayout/sec_jack.kl:system/usr/keylayout/sec_jack.kl
 
-# Generated kcm keymaps
-PRODUCT_PACKAGES := \
-       melfas-touchkey.kcm \
-       s3c-keypad.kcm
+# Prebuilt kcm keymaps
+PRODUCT_COPY_FILES := \
+	device/samsung/infuse4g/keychars/aries-keypad.kcm.bin:system/usr/keychars/aries-keypad.kcm.bin \
+	device/samsung/infuse4g/keychars/Broadcom_Bluetooth_HID.kcm.bin:system/usr/keychars/Broadcom_Bluetooth_HID.kcm.bin \
+	device/samsung/infuse4g/keychars/melfas_touchkey.kcm.bin:system/usr/keychars/melfas_touchkey.kcm.bin \
+	device/samsung/infuse4g/keychars/qwerty.kcm.bin:system/usr/keychars/qwerty.kcm.bin \
+	device/samsung/infuse4g/keychars/qwerty2.kcm.com:system/usr/keychars/qwerty2.kcm.bin
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
@@ -96,7 +100,7 @@ PRODUCT_COPY_FILES += \
     vendor/cyanogen/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
 
 # wpa_supplicant
-PRODUCT_COPY_FILE += \
+PRODUCT_COPY_FILES += \
 	device/samsung/infuse4g/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
 
 # These are the hardware-specific features
@@ -127,8 +131,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
        wifi.supplicant_scan_interval=20 \
        ro.telephony.ril_class=samsung \
        mobiledata.interfaces=pdp0,eth0,gprs,ppp0 \
-       dalvik.vm.heapsize=64m
-
+       dalvik.vm.heapsize=48m
+    
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -142,6 +146,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.kernel.android.checkjni=0 \
     dalvik.vm.checkjni=false
+
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.ril.hsxpa=2 \
+	ro.ril.gprsclass=12 \
+	ro.ril.hsdpa.category=8 \
+	ro.ril.hsupa.category=5
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise

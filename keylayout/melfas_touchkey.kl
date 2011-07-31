@@ -1,0 +1,12 @@
+key 139   MENU              WAKE_DROPPED
+key 158   BACK              WAKE_DROPPED
+key 217   SEARCH     	    WAKE_DROPPED
+key 102   HOME     	    WAKE_DROPPED
+
+key 232   DPAD_CENTER       WAKE_DROPPED
+key 108   DPAD_DOWN         WAKE_DROPPED
+key 103   DPAD_UP           WAKE_DROPPED
+key 105   DPAD_LEFT         WAKE_DROPPED
+key 106   DPAD_RIGHT        WAKE_DROPPED
+key 231   SEND              WAKE_DROPPED
+key 212   CAMERA						WAKE_DROPPED
