@@ -69,7 +69,7 @@ PRODUCT_COPY_FILES := \
 	device/samsung/infuse4g/keychars/Broadcom_Bluetooth_HID.kcm.bin:system/usr/keychars/Broadcom_Bluetooth_HID.kcm.bin \
 	device/samsung/infuse4g/keychars/melfas_touchkey.kcm.bin:system/usr/keychars/melfas_touchkey.kcm.bin \
 	device/samsung/infuse4g/keychars/qwerty.kcm.bin:system/usr/keychars/qwerty.kcm.bin \
-	device/samsung/infuse4g/keychars/qwerty2.kcm.com:system/usr/keychars/qwerty2.kcm.bin
+	device/samsung/infuse4g/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
