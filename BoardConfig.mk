@@ -57,6 +57,8 @@ endif
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 
+BOARD_HAS_VIBRATOR_IMPLEMENTATION := ../../device/samsung/infuse4g/vibrator/tspdrv.c
+
 # Video Devices
 BOARD_USES_OVERLAY := true
 BOARD_V4L2_DEVICE := /dev/video1

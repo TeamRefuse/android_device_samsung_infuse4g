@@ -149,8 +149,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.ril.hsxpa=2 \
 	ro.ril.gprsclass=12 \
-	ro.ril.hsdpa.category=8 \
-	ro.ril.hsupa.category=5
+	ro.ril.hsdpa.category=14 \
+	ro.ril.hsupa.category=6
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise

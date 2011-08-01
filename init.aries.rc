@@ -210,6 +210,10 @@ on boot
 
     chown radio system /sys/class/sec/switch/tethering
 
+#change permissions for vibrator
+    chmod 0660 /sys/class/timed_output/vibrator/enable
+    chown system system /sys/class/timed_output/vibrator/enable
+
 
 # create data/gps for GPS demon
     mkdir /data/gps 770 gps system
@@ -512,23 +516,10 @@ service keystore /system/bin/keystore /data/misc/keystore
     group keystore
     socket keystore stream 666
 
-service immvibed /system/vendor/bin/immvibed
-    user shell
-    group shell
-    oneshot
-
 service dumpstate /system/bin/dumpstate -s
     socket dumpstate stream 0660 shell log
     disabled
     oneshot
-
-#service orientationd /system/vendor/bin/orientationd
-#    user compass
-#    group system input
-
-#service geomagneticd /system/vendor/bin/geomagneticd
-#    user compass
-#    group system input
 
 service tvout /system/bin/tvoutserver
     user system

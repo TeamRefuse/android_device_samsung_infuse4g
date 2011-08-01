@@ -71,6 +71,10 @@ loglevel 9
     # imagefile directory will be bind-mounted
     mkdir /mnt/secure/asec  0700 root root
 
+    # tmp
+    mkdir /tmp
+    mount tmpfs tmpfs /tmp
+
     # Secure container public mount points.
     mkdir /mnt/asec  0700 root system
     mount tmpfs tmpfs /mnt/asec mode=0755,gid=1000
