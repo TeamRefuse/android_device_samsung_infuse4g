@@ -53,7 +53,7 @@ ifeq ($(USE_CAMERA_STUB),false)
 BOARD_CAMERA_LIBRARIES := libcamera
 endif
 
-TARGET_PROVIDES_LIBAUDIO := true
+# TARGET_PROVIDES_LIBAUDIO := true
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true

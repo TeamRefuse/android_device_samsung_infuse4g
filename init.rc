@@ -50,6 +50,8 @@ loglevel 9
     symlink /system/etc /etc
     symlink /mnt/sdcard /sdcard
     symlink /mnt/emmc /emmc
+    symlink /mnt/emmc /sd-ext
+    symlink /mnt/emmc /mnt/sdcard/external_sd
 
 # Create cgroup mount point for cpu accounting
     mkdir /acct

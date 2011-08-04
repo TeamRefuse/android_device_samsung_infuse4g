@@ -88,6 +88,9 @@ PRODUCT_COPY_FILES += \
 	libOMX.SEC.M4V.Encoder.aries \
 	libOMX.SEC.AVC.Encoder.aries
 
+PRODUCT_PACKAGES += \
+	lights.aries \
+	overlay.aries
 
 # Libs
 PRODUCT_PACKAGES += \
