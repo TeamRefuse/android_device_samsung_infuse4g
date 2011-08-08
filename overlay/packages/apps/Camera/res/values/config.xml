@@ -18,6 +18,12 @@
 -->
 
 <resources>
-	<!-- Samsung Camcorder Mode -->
-	<bool name="needsSamsungCamMode">true</bool>
+    <!-- Samsung Camcorder Mode -->
+    <bool name="needsSamsungCamMode">true</bool>
+
+    <!-- Samsung Continuous Autofocus -->
+    <bool name="needsSamsungContinuousAf">true</bool>
+
+    <!-- Samsung Special Settings -->
+    <bool name="needsSamsungSpecialSettings">true</bool>
 </resources>

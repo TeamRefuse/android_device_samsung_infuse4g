@@ -78,10 +78,10 @@ PRODUCT_PACKAGES += \
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
 	device/samsung/aries-common/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
-	device/samsung/infuse4g/media_profiles.xml:system/etc/media_profiles.xml
+	device/samsung/aries-common/media_profiles.xml:system/etc/media_profiles.xml
 
 # These are the OpenMAX IL modules
- PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES += \
  	libSEC_OMX_Core.aries \
 	libOMX.SEC.AVC.Decoder.aries \
  	libOMX.SEC.M4V.Decoder.aries \
@@ -100,6 +100,10 @@ PRODUCT_PACKAGES += \
 # apns config file
 PRODUCT_COPY_FILES += \
     vendor/cyanogen/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
+
+# Bluetooth MAC Address
+PRODUCT_PACKAGES += \
+	bdaddr_read
 
 # wpa_supplicant
 PRODUCT_COPY_FILES += \

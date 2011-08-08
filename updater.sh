@@ -8,8 +8,11 @@ export PATH=/:/sbin:/system/xbin:/system/bin:/tmp:$PATH
 
 test_mount()
 {
-	if ! /tmp/busybox mount -t ext4 /dev/block/$2 /$1; then
-             umount_format $1 $2
+    if [ $1 == "system" ]; then
+        # always go ahead and format /system
+           umount_format $1 $2
+    elif ! /tmp/busybox mount -t ext4 /dev/block/$2 /$1; then
+           umount_format $1 $2
 	else 
            echo "Partition $1 is already EXT4."
            umount /$1
