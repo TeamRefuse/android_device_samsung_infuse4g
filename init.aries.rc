@@ -22,7 +22,6 @@ on boot
     setprop ro.build.product aries
     setprop ro.product.device aries
     setprop ro.radio.noril yes
-    setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
 
 # fake some battery state
     setprop status.battery.state Slow
@@ -214,7 +213,6 @@ on boot
     chmod 0660 /sys/class/timed_output/vibrator/enable
     chown system system /sys/class/timed_output/vibrator/enable
 
-
 # create data/gps for GPS demon
     mkdir /data/gps 770 gps system
     chown system system /data/gps
@@ -234,8 +232,8 @@ on fs
     chmod 770 /efs/imei
 
 # permissions for bluetooth.
-    chown bluetooth bluetooth ro.bt.bdaddr_path
     chown bluetooth bluetooth /dev/s3c2410_serial0
+    chown bluetooth bluetooth /data/bdaddr
     chmod 0660 /dev/s3c2410_serial0
     chmod 0660 /sys/class/rfkill/rfkill0/state
     chmod 0660 /sys/class/rfkill/rfkill1/state
@@ -400,7 +398,17 @@ service iprenew_eth0 /system/bin/dhcpcd -n
     disabled
     oneshot
 
+service bdaddr /system/bin/bdaddr_read
+    user root
+    disabled
+    oneshot
+
+on property:init.svc.bootanim=running
+    start bdaddr
+
 service hciattach /system/bin/hciattach /dev/s3c2410_serial0 any
+#service hciattach /system/bin/brcm_patchram_plus --enable_hci --enable_lpm \
+#    --baudrate 3000000 --patchram /system/bin/BCM4330B1_002.001.003.0043.0061.hcd /dev/s3c2410_serial0
     user bluetooth
     group bluetooth net_bt_admin
     disabled
@@ -456,11 +464,20 @@ service dbus /system/bin/dbus-daemon --system --nofork
     user bluetooth
     group bluetooth net_bt_admin
 
-service btld /system/vendor/bin/btld -hb 3000000 -hp /dev/s3c2410_serial0 -lpm 1
-    user root
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
+#service btld /system/vendor/bin/btld -hb 3000000 -hp /dev/s3c2410_serial0 -lpm 1
+#    user bluetooth
+#    group bluetooth net_bt_admin
+#    disabled
+#    oneshot
+
+# start btld if soft_onoff is enabled
+#on property:service.brcm.bt.soft_onoff=1
+#    start btld
+
+# stop btld if soft_onoff is disabled
+#on property:service.brcm.bt.soft_onoff=0
+#    stop btld
+
 
 service bluetoothd /system/bin/bluetoothd -n
     socket bluetooth stream 660 bluetooth bluetooth
@@ -546,3 +563,4 @@ service console /system/bin/sh
 
 on property:ro.secure=0
     start console
+
