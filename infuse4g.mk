@@ -70,6 +70,9 @@ PRODUCT_COPY_FILES += \
 	device/samsung/infuse4g/keychars/qwerty.kcm.bin:system/usr/keychars/qwerty.kcm.bin \
 	device/samsung/infuse4g/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin
 
+# Flash torch
+PRODUCT_PACKAGES += Torch
+	
 # Filesystem management tools
 PRODUCT_PACKAGES += \
 	make_ext4fs \

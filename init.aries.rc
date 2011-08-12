@@ -379,6 +379,18 @@ on post-fs
 	  chown system system /dev/cg2900_us_ctrl
       chmod 0770 /dev/cg2900_us_ctrl
 
+on property:persist.service.usb.setting=0
+    write /sys/devices/platform/android_usb/UsbMenuSel 0
+on property:persist.service.usb.setting=1
+    write /sys/devices/platform/android_usb/UsbMenuSel 1
+on property:persist.service.usb.setting=2
+    write /sys/devices/platform/android_usb/UsbMenuSel 2
+on property:persist.service.usb.setting=3
+    write /sys/devices/platform/android_usb/UsbMenuSel 3
+on property:persist.service.usb.setting=4
+    write /sys/devices/platform/android_usb/UsbMenuSel 4
+
+
 # 3D init
 service pvrsrvinit /system/vendor/bin/pvrsrvinit
     user root
