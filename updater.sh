@@ -8,6 +8,8 @@ export PATH=/:/sbin:/system/xbin:/system/bin:/tmp:$PATH
 
 test_mount()
 {
+    echo "Unmounting $1 on $2"
+    /tmp/busybox umount -l /$1
     if [ $1 == "system" ]; then
         # always go ahead and format /system
            umount_format $1 $2
@@ -15,21 +17,20 @@ test_mount()
            umount_format $1 $2
 	else 
            echo "Partition $1 is already EXT4."
-           umount /$1
+           /tmp/busybox umount -l /$1
     fi
 }
 
 umount_format()
 {
-        echo "Unmounting $1 on $2"
-        /tmp/busybox umount /$1
         if [ $(/tmp/busybox mount | grep "/dev/block/$2 on /$1 type" | wc -l) -eq "0" ]; then
                 echo "Formatting $1 on $2 to EXT4"
                 /tmp/make_ext4fs -b 4096 -g 32768 -i 8192 -I 256 -a /$1 /dev/block/$2
                 echo "Successfully converted $1 on $2"
         else
+                # We're still mounted for some reason
                 echo "Cannot unmount $1 on $2"
-                exit $?
+                exit 1 
         fi
 }
 
