@@ -51,6 +51,7 @@ PRODUCT_COPY_FILES += \
 	device/samsung/infuse4g/init.rc:root/init.rc \
 	device/samsung/infuse4g/init.aries.rc:root/init.aries.rc \
 	device/samsung/infuse4g/ueventd.aries.rc:root/ueventd.aries.rc \
+	device/samsung/aries-common/lpm.rc:root/lpm.rc \
 	device/samsung/infuse4g/setupenv.sh:recovery/root/sbin/setupenv.sh
 
 # Prebuilt kl keymaps
@@ -70,9 +71,6 @@ PRODUCT_COPY_FILES += \
 	device/samsung/infuse4g/keychars/qwerty.kcm.bin:system/usr/keychars/qwerty.kcm.bin \
 	device/samsung/infuse4g/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin
 
-# Flash torch
-PRODUCT_PACKAGES += Torch
-	
 # Filesystem management tools
 PRODUCT_PACKAGES += \
 	make_ext4fs \

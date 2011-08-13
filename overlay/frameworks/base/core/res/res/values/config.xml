@@ -61,11 +61,11 @@
     <integer-array name="config_autoBrightnessLcdBacklightValues">
         <item>20</item>
         <item>20</item>
-        <item>20</item>
-        <item>20</item>
+        <item>35</item>
         <item>35</item>
         <item>50</item>
         <item>50</item>
+        <item>100</item>
         <item>100</item>
         <item>255</item>
     </integer-array>
@@ -77,13 +77,13 @@
     <integer-array name="config_autoBrightnessButtonBacklightValues">
         <item>255</item>
         <item>255</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
+        <item>255</item>
+        <item>255</item>
+        <item>255</item>
+        <item>255</item>
+        <item>255</item>
+        <item>255</item>
+        <item>255</item>
     </integer-array>
 
     <!-- Array of output values for keyboard backlight corresponding to the LUX values
