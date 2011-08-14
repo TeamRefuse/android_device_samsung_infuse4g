@@ -222,7 +222,7 @@ on fs
     mount ext4 /dev/block/stl9 /system ro remount
     mount ext4 /dev/block/stl11 /cache nosuid nodev noatime nodiratime noauto_da_alloc
     mount ext4 /dev/block/mmcblk0p2 /data wait nosuid noatime nodiratime noauto_da_alloc
-    mount ext4 /dev/block/stl10 /dbdata nosuid nodev nodiratime noauto_da_alloc
+    mount ext4 /dev/block/stl10 /datadata nosuid nodev nodiratime noauto_da_alloc
 
 # We chown/chmod /efs because mount is run as root + defaults
     mkdir /efs 0775 radio radio
@@ -256,11 +256,11 @@ on post-fs
     # remove /sbin/sh so that "adb install" can work properly
     exec /sbin/setupenv.sh
 
-    # We chown/chmod /data and /dbdata again so because mount is run as root + defaults
+    # We chown/chmod /data and /datadata again so because mount is run as root + defaults
     chown system system /data
     chmod 0771 /data
-    chown system system /dbdata
-    chmod 0771 /dbdata
+    chown system system /datadata
+    chmod 0771 /datadata
 
     # Create dump dir and collect dumps.
     # Do this before we mount cache so eventually we can use cache for
@@ -316,8 +316,8 @@ on post-fs
     mkdir /data/local 0771 shell shell
     mkdir /data/local/tmp 0771 shell shell
     #mkdir /data/data 0771 system system
-    # symlink /data/data to /dbdata for performance
-    symlink /dbdata /data/data
+    # symlink /data/data to /datadata for performance
+    symlink /datadata /data/data
 
     mkdir /data/app-private 0771 system system
     mkdir /data/app 0771 system system

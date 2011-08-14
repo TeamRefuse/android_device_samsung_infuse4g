@@ -8,7 +8,7 @@ export PATH=/:/sbin:/system/xbin:/system/bin:/tmp:$PATH
 
 test_mount()
 {
-    echo "Unmounting $1 on $2"
+    echo "Trying to unmount $1 on $2"
     /tmp/busybox umount -l /$1
     if [ $1 == "system" ]; then
         # always go ahead and format /system
@@ -37,7 +37,7 @@ umount_format()
 
 # check each partition
 test_mount system stl9
-test_mount dbdata stl10
+test_mount datadata stl10
 test_mount data mmcblk0p2
 test_mount cache stl11 
 /tmp/busybox mount -t ext4 /dev/block/stl11 /cache
