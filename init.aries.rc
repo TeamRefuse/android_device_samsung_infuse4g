@@ -327,7 +327,6 @@ on post-fs
     mkdir /data/dalvik-cache 0771 system system
     chown system system /data/dalvik-cache
     chmod 0771 /data/dalvik-cache
-    symlink /data/dalvik-cache /cache/dalvik-cache
 
     # create the lost+found directories, so as to enforce our permissions
     mkdir /data/lost+found 0770
@@ -406,7 +405,7 @@ service bdaddr /system/bin/bdaddr_read
 on property:init.svc.bootanim=running
     start bdaddr
 
-service hciattach /system/bin/hciattach /dev/s3c2410_serial0 any
+service hciattach /system/bin/logwrapper /system/bin/hciattach -n -s 115200 /dev/s3c2410_serial0 any 4000000 flow
 #service hciattach /system/bin/brcm_patchram_plus --enable_hci --enable_lpm \
 #    --baudrate 3000000 --patchram /system/bin/BCM4330B1_002.001.003.0043.0061.hcd /dev/s3c2410_serial0
     user bluetooth
@@ -479,7 +478,7 @@ service dbus /system/bin/dbus-daemon --system --nofork
 #    stop btld
 
 
-service bluetoothd /system/bin/bluetoothd -n
+service bluetoothd /system/bin/logwrapper /system/bin/bluetoothd -n
     socket bluetooth stream 660 bluetooth bluetooth
     socket dbus_bluetooth stream 660 bluetooth bluetooth
     # init.rc does not yet support applying capabilities, so run as root and
