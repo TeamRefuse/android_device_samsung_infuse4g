@@ -222,6 +222,15 @@ on boot
 service ueventd /sbin/ueventd
     critical
 
+service console /system/bin/sh
+    console
+    disabled
+    user shell
+    group log
+
+on property:ro.secure=0
+    start console
+
 # adbd is controlled by the persist.service.adb.enable system property
 service adbd /sbin/adbd
     disabled
