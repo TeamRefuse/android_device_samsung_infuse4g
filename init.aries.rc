@@ -113,10 +113,6 @@ on boot
     chown radio system /sys/class/sec/switch/uart_sel
     chown radio system /sys/class/sec/switch/usb_state
     chown radio system /sys/class/sec/switch/disable_vbus
-    chmod 0664 /sys/devices/platform/android_usb/UsbMenuSel
-    chown radio system /sys/devices/platform/android_usb/UsbMenuSel
-    chmod 0664 /sys/devices/platform/android_usb/AskOnStatus
-    chown radio system /sys/devices/platform/android_usb/AskOnStatus
  
     #change permissions for fuel gauge
     chown radio system /sys/class/sec/fg_atcom_test/set_fuel_gauage_read
