@@ -311,9 +311,7 @@ on post-fs
     chown system wifi /data/misc/wifi/wpa_supplicant.conf
     mkdir /data/local 0771 shell shell
     mkdir /data/local/tmp 0771 shell shell
-    #mkdir /data/data 0771 system system
-    # symlink /data/data to /datadata for performance
-    symlink /datadata /data/data
+    mkdir /data/data 0771 system system
 
     mkdir /data/app-private 0771 system system
     mkdir /data/app 0771 system system
@@ -357,7 +355,7 @@ on post-fs
       chown system system /data/gps
       chmod 770 /data/GPS_NV_Data.bin
       chmod 770 /data/GPS_UTC_Calib.bin
-  chown system system /dev/cg2900_audio
+      chown system system /dev/cg2900_audio
       chmod 0770 /dev/cg2900_audio
 	  chown system system /dev/cg2900_bt_audio
       chmod 0770 /dev/cg2900_bt_audio
@@ -445,25 +443,12 @@ service dbus /system/bin/dbus-daemon --system --nofork
     user bluetooth
     group bluetooth net_bt_admin
 
-#service hciattach /system/bin/brcm_patchram_plus --enable_hci --enable_lpm --baudrate 3000000 --patchram /system/bin/BCM4330B1_002.001.003.0043.0061.hcd /dev/ttyHS0
-    #user bluetooth
-    #group bluetooth net_bt_admin
-    #disabled
-    #oneshot
-
-service btld /system/bin/logwrapper /system/vendor/bin/btld -hb 3000000 -hp /dev/s3c2410_serial0 -lpm 1
-     user root
-     group bluetooth net_bt_admin
-     disabled
-     oneshot
-
-# start btld if soft_onoff is enabled
-on property:service.brcm.bt.soft_onoff=1
-    start btld
-
-# stop btld if soft_onoff is disabled
-on property:service.brcm.bt.soft_onoff=0
-     stop btld
+service hciattach /system/bin/logwrapper /system/bin/hciattach /dev/s3c2410_serial0 any
+#service hciattach /system/bin/logwrapper /system/bin/brcm_patchram_plus --enable_hci --enable_lpm --baudrate 2000000 --patchram /system/bin/BCM4330B1_002.001.003.0043.0061.hcd /dev/s3c2410_serial0
+    user bluetooth
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
 
 service bluetoothd /system/bin/logwrapper /system/bin/bluetoothd -d -n
     socket bluetooth stream 660 bluetooth bluetooth

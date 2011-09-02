@@ -154,12 +154,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.kernel.android.checkjni=0 \
     dalvik.vm.checkjni=false
 
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.ril.hsxpa=2 \
-	ro.ril.gprsclass=12 \
-	ro.ril.hsdpa.category=14 \
-	ro.ril.hsupa.category=6
-
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
@@ -199,6 +193,10 @@ PRODUCT_COPY_FILES += \
     device/samsung/infuse4g/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
     device/samsung/infuse4g/modules/ansi_cprng.ko:system/lib/modules/ansi_cprng.ko \
     device/samsung/infuse4g/modules/vibrator.ko:system/lib/modules/vibrator.ko
+
+PRODUCT_COPY_FILES += \
+	device/samsung/infuse4g/hciattach:system/bin/hciattach \
+	device/samsung/infuse4g/brcm_patchram_plus:system/bin/brcm_patchram_plus
 
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
