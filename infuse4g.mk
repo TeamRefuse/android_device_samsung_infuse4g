@@ -106,6 +106,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
 	bdaddr_read
 
+# Service Mode Secret Code
+PRODUCT_PACKAGES += \
+    SamsungServiceMode
+
 # wpa_supplicant
 PRODUCT_COPY_FILES += \
 	device/samsung/infuse4g/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
