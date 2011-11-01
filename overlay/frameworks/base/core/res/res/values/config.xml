@@ -45,13 +45,9 @@
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
         <item>10</item>
-        <item>160</item>
-        <item>225</item>
-        <item>320</item>
-        <item>640</item>
-        <item>1280</item>
-        <item>2600</item>
-        <item>10240</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
     </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
@@ -61,12 +57,8 @@
     <integer-array name="config_autoBrightnessLcdBacklightValues">
         <item>20</item>
         <item>20</item>
-        <item>20</item>
-        <item>20</item>
-        <item>35</item>
-        <item>50</item>
-        <item>50</item>
-        <item>100</item>
+        <item>80</item>
+        <item>120</item>
         <item>255</item>
     </integer-array>
 
@@ -77,13 +69,9 @@
     <integer-array name="config_autoBrightnessButtonBacklightValues">
         <item>255</item>
         <item>255</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
+        <item>255</item>
+        <item>255</item>
+        <item>255</item>
     </integer-array>
 
     <!-- Array of output values for keyboard backlight corresponding to the LUX values
@@ -92,10 +80,6 @@
          Crespo has no keyboard so all values are zero.
     -->
     <integer-array name="config_autoBrightnessKeyboardBacklightValues">
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
         <item>0</item>
         <item>0</item>
         <item>0</item>
