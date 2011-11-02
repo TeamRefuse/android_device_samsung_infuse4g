@@ -108,7 +108,8 @@ PRODUCT_PACKAGES += \
 
 # Service Mode Secret Code
 PRODUCT_PACKAGES += \
-    SamsungServiceMode
+    SamsungServiceMode \
+    AriesParts
 
 # wpa_supplicant
 PRODUCT_COPY_FILES += \
