@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<bool name="has_led_flash">false</bool>
+    <bool name="has_led_flash">false</bool>
     <!-- Whether or not to display the trackball settings -->
     <bool name="has_trackball">false</bool>
     <!-- Notification LED has single color only -->
