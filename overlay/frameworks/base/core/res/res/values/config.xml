@@ -27,6 +27,10 @@
     <!-- There is no charging LED. -->
     <bool name="config_unplugTurnsOnScreen">true</bool>
 
+    <!-- Keep the screen on when a car dock is in use, but not the media dock -->
+    <integer name="config_deskDockKeepsScreenOn">0</integer>
+    <integer name="config_carDockKeepsScreenOn">1</integer>
+
     <!-- Our amoled doesn't animate well. -->
     <bool name="config_animateScreenLights">false</bool>
 
